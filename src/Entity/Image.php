@@ -1,40 +1,69 @@
 <?php
+// api/src/Entity/MediaObject.php
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Controller\CreateImageObjectAction;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+ * @ORM\Entity
  * @ApiResource(
- *  normalizationContext={
- *      "groups"={"produit_read"}
- * }
+ *     normalizationContext={
+ *         "groups"={"media_object_read","post_read"}
+ *     },
+ *     collectionOperations={
+ *         "post"={
+*             "path"="/images",
+*             "controller"=CreateImageObjectAction::class,
+*             "defaults"={"_api_receive"=false}
+ *            },
+ *         "get"
+ *     }
  * )
+ * @Vich\Uploadable
  */
-class Image
+ class Image
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @var int|null
+     *
      * @ORM\Column(type="integer")
-     * @Groups({"produit_read"})
+     * @ORM\GeneratedValue
+     * @ORM\Id
+     * @Groups({"media_object_read","post_read"})
      */
-    private $id;
+    protected $id;
+
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"produit_read"})
+     * @var File|null
+     *
+     * 
+     * @Vich\UploadableField(mapping="images", fileNameProperty="filePath")
+     * @Groups({"media_object_read","post_read"})
+     * @Assert\NotBlank(message="Aucune image n'a été trouvée")
+     * @Assert\File(
+     *     maxSize = "3072k",
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Please upload a valid Image"
+     * )
      */
-    private $caption;
+    public $file;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"produit_read"})
+     * @var string|null
+     *
+     * @ORM\Column(nullable=true)
+     * @Groups({"media_object_read","post_read"})
      */
-    private $path;
+    public $filePath;
 
 
 
@@ -43,39 +72,20 @@ class Image
         return $this->id;
     }
 
-    public function getCaption(): ?string
+    public function setFile($file)
     {
-        return $this->caption;
+        return $this->file = $file;
     }
-
-    public function setCaption(string $caption): self
+    public function geFile()
     {
-        $this->caption = $caption;
-
-        return $this;
+        return $this->file;
     }
-
-    public function getPath(): ?string
+    public function setFilePah($filePath)
     {
-        return $this->path;
+        return 'images/' . $this->filePath = $filePath;
     }
-
-    public function setPath(string $path): self
+    public function getFilePah()
     {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    public function getProduit(): ?Produit
-    {
-        return $this->Produit;
-    }
-
-    public function setProduit(?Produit $Produit): self
-    {
-        $this->Produit = $Produit;
-
-        return $this;
+        return $this->filePath;
     }
 }

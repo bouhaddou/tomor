@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200421172352 extends AbstractMigration
+final class Version20200424003942 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -24,7 +24,7 @@ final class Version20200421172352 extends AbstractMigration
 
         $this->addSql('ALTER TABLE avatar CHANGE file_path file_path VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE client CHANGE company company VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE post CHANGE avatar avatar VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE image CHANGE file_path file_path VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE produit CHANGE set_date set_date DATETIME DEFAULT NULL');
         $this->addSql('ALTER TABLE user CHANGE roles roles JSON NOT NULL');
     }
@@ -36,7 +36,7 @@ final class Version20200421172352 extends AbstractMigration
 
         $this->addSql('ALTER TABLE avatar CHANGE file_path file_path VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE client CHANGE company company VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('ALTER TABLE post CHANGE avatar avatar VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE image CHANGE file_path file_path VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE produit CHANGE set_date set_date DATETIME DEFAULT \'NULL\'');
         $this->addSql('ALTER TABLE user CHANGE roles roles LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_bin`');
     }

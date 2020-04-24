@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 const HomePage = (props) => {
     const [produits,setProduits] = useState({});
     const [filterProduit,setFilterProduit] = useState({});
-    const [bestProduct,setBestProduct] = useState({});
+    const [bestProduct,setBestProduct] = useState(undefined);
     const [edi,setEdi] = useState(false);
 
   
@@ -20,7 +20,8 @@ const HomePage = (props) => {
      const data = await  produitsApi.findAll();
         setProduits(data);
         setFilterProduit(data.slice(0,6))
-        const nombre = Math.floor(Math.random() * (data.length - 1 + 1)) + 1;
+        const nombre = Math.floor(Math.random() * (data.length - 1 )) + 1;
+        console.log(data[nombre])
         setBestProduct(data[nombre])
         this.props.setCartNav({})
    }catch(error){
@@ -118,12 +119,14 @@ console.log(bestProduct)
                 <div className="col-lg-5  ">
                   <div className="" >
                       {/* <img  className="img-fluid h-100 rounded" src={bestProduct && bestProduct.avatar} /> */}
-                      {/* <img style={{ maxHeight: 165  }}  className="img-fluid w-100 h-100" src={bestProduct && ("avatars/" +  bestProduct.avatars.filePath)} /> */}
+                      {bestProduct  && (<img   className="img-fluid w-100 h-100" 
+                          src={"avatars/" +  bestProduct.avatars[0].filePath }/> )}
                   </div>
+                 
                 </div>
                 <div className="col-lg-7 text-center">
                   <div className="offer_content">
-                      <h3 className="text-uppercase mb-40">{bestProduct &&bestProduct.title}</h3>
+                      <h3 className="text-uppercase mb-40">{bestProduct && bestProduct.title}</h3>
                       <h3 className="text-uppercase">30% de promotion</h3>
                       <a href="#" className="main_btn mb-20 mt-5">voir plus</a>
                       <div className=" product-btm mt-3">

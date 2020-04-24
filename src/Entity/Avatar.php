@@ -61,7 +61,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
      * @var string|null
      *
      * @ORM\Column(nullable=true)
-     * @Groups({"media_object_read","produit_read"})
      * @Groups({"produit_read","media_object_read"})
      */
     public $filePath;

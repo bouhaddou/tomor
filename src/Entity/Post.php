@@ -2,13 +2,25 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Image;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
- * @ApiResource()
+ * @ORM\HasLifecycleCallbacks()
+ * @ApiResource(
+ *  normalizationContext={
+ *      "groups"={"post_read","media_object_read"}
+ * }
+ *
+ * )
  */
 class Post
 {
@@ -21,23 +33,44 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"post_read","media_object_read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"post_read","media_object_read"})
      */
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var Image|null
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image")
+     * @ORM\JoinColumn()
+     * ApiSubresource()
+     * @Groups({"post_read"})
      */
-    private $avatar;
+    public $images;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"post_read","media_object_read"})
      */
     private $setAt;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function dddsdad()
+    {
+        $this->setAt = new \DateTime();
+    }
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,7 +85,6 @@ class Post
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -68,18 +100,6 @@ class Post
         return $this;
     }
 
-    public function getAvatar(): ?string
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?string $avatar): self
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
     public function getSetAt(): ?\DateTimeInterface
     {
         return $this->setAt;
@@ -88,7 +108,26 @@ class Post
     public function setSetAt(\DateTimeInterface $setAt): self
     {
         $this->setAt = $setAt;
-
         return $this;
     }
+
+        /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addAvatar(Image $image)
+    {
+            $this->images->add($image);
+
+    }
+    public function removeImage(Image $image)
+    {
+            $this->images->removeElement($image);
+
+    }
+    
 }

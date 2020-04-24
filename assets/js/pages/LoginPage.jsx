@@ -32,7 +32,7 @@ const LoginPage = ({onLogin , history}) => {
 
     return (<>
         
-        <div className="row">
+        <div style={{ height: 470 }} className="row ">
             <div className="col-md-6 offset-md-3 mt-5">
             <h1 className="text-center mt-5 mb-3">Authentification</h1>
                 <form onSubmit={handleSubmit}>

@@ -26,6 +26,7 @@ import CommandePage from './pages/admin/shops/CommandePage';
 import ShowShops from './pages/admin/shops/ShowShops'
 import ContactPage from './pages/admin/contact/ContactPage';
 import PostPage from './pages/admin/post/PostPage';
+import PostsPage from './pages/admin/post/PostsPage';
 LoginApi.setup();
 const App = () => {
     const [cartNav, setCartNav] = useState([])
@@ -59,7 +60,8 @@ const App = () => {
                 {!isAuthenticated && <Route path="/" render={props=>{return <HomePage setCartNav={setCartNav} {...props} /> }} /> }
                 <div className="content-wrapper">
                 <Switch>
-                <PrivatRoute path="/posts" component={PostPage} isAuthenticated={isAuthenticated}  />
+                <PrivatRoute path="/posts/:id" component={PostPage} isAuthenticated={isAuthenticated}  />
+                <PrivatRoute path="/posts" component={PostsPage} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/AdminContact" component={ContactPage} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/shops/show/:id" component={ShowShops} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/shops" component={CommandePage} isAuthenticated={isAuthenticated}  />
