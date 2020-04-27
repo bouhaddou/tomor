@@ -86,7 +86,8 @@ if(!Produits){ return <div>chargement</div>}else{ return ( <>
                           <ul className="list-inline text-center">
                             { produit.avatars != 0 && produit.avatars.map((image) =>
                               <li className="list-inline-item" key={image.id}>
-                                  <img style={{ maxHeight: 60, maxWidth:60  }} className="table-avatar rounded-circle text-center" src={"avatars/" +  image.filePath} alt={produit.ref} />
+                                  <img style={{ maxHeight: 60, maxWidth:60  }} className="table-avatar rounded-circle text-center" 
+                                  src={"avatars/" +  image.filePath} alt={produit.ref} />
                               </li>
                             )}
                           </ul>

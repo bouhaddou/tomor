@@ -30,17 +30,19 @@ import PostPage from './pages/admin/post/PostPage';
 import PostsPage from './pages/admin/post/PostsPage';
 import ShowPost from './pages/admin/post/ShowPost';
 import AdminFooter from './Component/AdminFooter';
+import {I18nProvider,LOCALES} from './i18n'
+import {FormattedMessage} from 'react-intl'
+import translate from './i18n/translate'
 LoginApi.setup();
 const App = () => {
     const [cartNav, setCartNav] = useState([])
+    const [lang, setLang]= useState(LOCALES.FRENSH)
     const funcNav = () =>{
-      
            const x = JSON.parse(localStorage.getItem("product"));
            if(x){
            setCartNav(x)
            }
            console.log(x)
-        
       }
       
       useEffect(() =>{
@@ -57,11 +59,10 @@ const App = () => {
 
 
     return ( <>
+        <I18nProvider locale={lang}>
          <div className="">
         <HashRouter>
-            
-            {!isAuthenticated && <Navbar cartNav={cartNav}  />}
-            
+            {!isAuthenticated && <Navbar cartNav={cartNav} setLang={setLang}  />}
             {isAuthenticated && <AdminNavbar />}
             {isAuthenticated && <AdminAside />}
             <Switch>
@@ -98,6 +99,7 @@ const App = () => {
         <ToastContainer position={toast.POSITION.BOTTOM_LEFT}/>
         </HashRouter>
         </div>
+        </I18nProvider>
     </> );
 }
  

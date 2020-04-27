@@ -13,32 +13,34 @@ import '../../css/jquery-ui/jquery-ui.css'
 import '../../css/app.css';
 import '../../css/style.css'
 import '../../css/responsive.css';
+import translate from '../i18n/translate';
+import LOCALES from '../i18n/locales'
+const Navbar = ({cartNav,setLang}) => {
 
-const Navbar = ({cartNav}) => {
-console.log(cartNav)
+
  return ( 
     <>
   <header className="header_area">
     <div className="top_menu">
       <div className="container">
-        <div className="row">
-          <div className="col-lg-7 ">
+        <div className="row" dir="rtl">
+          <div className="col-lg-6 ">
             <div className="float-left">
-              <p><i className="fas fa-phone"></i> +212 618 911 741</p>
-              <p><i className="fas fa-message"></i>email: dattesaljinan@gmail.com</p>
+              <p dir="rtl"><i className="fas fa-phone"></i> +212 618 911 741</p>
+              <p dir="rtl"><i className="fas fa-message"></i>email: dattesaljinan@gmail.com</p>
             </div>
           </div>
-          <div className="col-lg-5">
+          <div className="col-lg-6">
             <div className="float-right">
               <ul className="right_side">
                 <li>
                   <Link to="/contact">
-                  Contact nous
+                    {translate("Contact")}
                   </Link>
                 </li>
                 <li>
                   <Link to="/cart">
-                  Cart
+                    {translate("Cart")}
                   </Link>
                 </li>
                 <li>
@@ -46,27 +48,21 @@ console.log(cartNav)
                     compte
                   </Link>
                 </li>
-                <li className="nav-item dropdown show">
-                        <a className="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
-                          <i className="flag-icon flag-icon-us"></i>
-                        </a>
-                        <ul>
-                        <div className="dropdown-menu dropdown-menu-right p-0 show">
-                          <a href="#" className="dropdown-item active">
-                            <i className="flag-icon flag-icon-us mr-2"></i> English
-                          </a>
-                          <a href="#" className="dropdown-item">
-                            <i className="flag-icon flag-icon-de mr-2"></i> German
-                          </a>
-                          <a href="#" className="dropdown-item">
-                            <i className="flag-icon flag-icon-fr mr-2"></i> French
-                          </a>
-                          <a href="#" className="dropdown-item">
-                            <i className="flag-icon flag-icon-es mr-2"></i> Spanish
-                          </a>
-                        </div>
-                        </ul>
-                    </li>
+                <li>
+                  <button onClick={() => setLang("en-US")}>
+                    English
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => setLang("fr-CA")}>
+                    Frensh
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => setLang("ar-MA")}>
+                    Arabic
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
@@ -90,23 +86,23 @@ console.log(cartNav)
               <div className="col-lg-7 pr-0">
                 <ul className="nav navbar-nav center_nav pull-right">
                   <li className="nav-item active">
-                    <Link className="nav-link" to="/">Accueil</Link>
+                    <Link className="nav-link" to="/">{translate("Accueil")}</Link>
                   </li>
                   <li className="nav-item submenu dropdown">
                     <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false">Produits</a>
+                      aria-expanded="false">{translate("Boutique")}</a>
                     <ul className="dropdown-menu">
                       <li className="nav-item">
-                        <Link className="nav-link" to="/produits">Produits</Link>
+                        <Link className="nav-link" to="/produits">{translate("Produits")}</Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/cart">Cart </Link>
+                        <Link className="nav-link" to="/cart">{translate("Cart")} </Link>
                       </li>
                     </ul>
                   </li>
                   <li className="nav-item submenu dropdown">
                     <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false">Blog</a>
+                      aria-expanded="false">{translate("Blog")}</a>
                     <ul className="dropdown-menu">
                       <li className="nav-item">
                       <Link className="nav-link" to="/blogPage">Blog </Link>
@@ -116,20 +112,8 @@ console.log(cartNav)
                       </li>
                     </ul>
                   </li>
-                  <li className="nav-item submenu dropdown">
-                    <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false">Pages</a>
-                    <ul className="dropdown-menu">
-                      <li className="nav-item">
-                        <a className="nav-link" href="tracking.html">Tracking</a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="elements.html">Elements</a>
-                      </li>
-                    </ul>
-                  </li>
                   <li className="nav-item">
-                  <Link className="nav-link" to="/contact">Contact </Link>
+                  <Link className="nav-link" to="/contact"> {translate("Contact")}  </Link>
                   </li>
                 </ul>
               </div>
@@ -140,7 +124,7 @@ console.log(cartNav)
                       aria-expanded="false"> 
                       <i className="fas fa-cart-plus fa-2x mr-2"></i>  
                       {/* <span className=""> {cartNav.length > 0 && cartNav.length} </span>  */}
-                    <span className="badge badge-warning  navbar-badge1">{ cartNav.length} </span> Panier</Link>
+                    <span className="badge badge-warning  navbar-badge1">{ cartNav.length} </span> {translate("Panier")}</Link>
                     <ul className="dropdown-menu "> <Link to="/cart">
                       <table className="table table-hover">
                         <thead>
@@ -161,7 +145,7 @@ console.log(cartNav)
                      </table>  </Link>
                     </ul>
                   </li>
-                
+                  
                 </ul>
               </div>
             </div>
