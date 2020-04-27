@@ -6,7 +6,7 @@ import produitsApi from '../services/produitsApi';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import PostApi from '../services/PostApi';
-
+import translate from '../i18n/translate';
 const HomePage = (props) => {
     const [produits,setProduits] = useState({});
     const [filterProduit,setFilterProduit] = useState({});
@@ -81,8 +81,8 @@ const handleShop =(param) => {
       <div className="row justify-content-center">
         <div className="col-lg-12">
           <div className="main_title">
-            <h2><span className="text-success"> Nouveaux produits</span></h2>
-            <p>Les meilleurs Produits au Royaume du Maroc</p>
+            <h2><span className="text-success"> {translate("Nouveaux produits")} </span></h2>
+            <p> {translate("meilleursProduits")}</p>
           </div>
         </div>
       </div>
@@ -147,9 +147,8 @@ const handleShop =(param) => {
       <div className="row justify-content-center">
         <div className="col-lg-12">
           <div className="main_title">
-            <h2><span>DERNIER BLOG</span></h2>
-            <p>Ici, nous vous proposons des articles utiles sur les dates ... 
-              et tout ce qui concerne les dates marocaines</p>
+            <h2><span>{translate("DERNIERBLOG")} </span></h2>
+            <p>{translate("BLOGDESC")}</p>
           </div>
         </div>
       </div>

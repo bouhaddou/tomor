@@ -74,7 +74,7 @@ const App = () => {
                 {!isAuthenticated && <Route path="/checkout" component={Checkout} />}
                 {!isAuthenticated && <Route path="/contact" component={Contact} />}
                 {!isAuthenticated && <Route path="/blogPage" component={BlogPage} /> }
-                {!isAuthenticated && <Route path="/" render={props=>{return <HomePage setCartNav={setCartNav} {...props} /> }} /> }
+                {!isAuthenticated && <Route path="/" render={props=>{return <HomePage setLang={setLang} setCartNav={setCartNav} {...props} /> }} /> }
                 <div className="content-wrapper">
                 <Switch>
                 <PrivatRoute path="/posts/show/:id" component={ShowPost} isAuthenticated={isAuthenticated}  />

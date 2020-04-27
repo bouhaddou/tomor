@@ -1,5 +1,5 @@
 import React from 'react';
-
+import translate from '../i18n/translate';
 
 const Slider = () => {
     return ( <>
@@ -50,9 +50,9 @@ const Slider = () => {
           <div className="single-feature">
             <a href="#" className="title">
               <i className="flaticon-money"></i>
-              <h3 className="text-success">Paiement à réception</h3>
+              <h3 className="text-success"> {translate("Paiement")}</h3>
             </a>
-            <p>Votre confiance est importante pour nous</p>
+            <p>{translate("PaiementP")}</p>
           </div>
         </div>
 
@@ -60,10 +60,9 @@ const Slider = () => {
           <div className="single-feature">
             <a href="#" className="title">
               <i className="flaticon-truck"></i>
-              <h3 className="text-success">Livraison à domicile</h3>
+              <h3 className="text-success">{translate("LIVRAISON")}</h3>
             </a>
-            <p>Ce service est disponible dans toutes les villes du Maroc, 
-              le délai maximum de réception est de 7 jours</p>
+            <p>{translate("LIVRAISONP")}</p>
           </div>
         </div>
 

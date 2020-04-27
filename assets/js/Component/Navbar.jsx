@@ -14,7 +14,6 @@ import '../../css/app.css';
 import '../../css/style.css'
 import '../../css/responsive.css';
 import translate from '../i18n/translate';
-import LOCALES from '../i18n/locales'
 const Navbar = ({cartNav,setLang}) => {
 
 
@@ -23,11 +22,11 @@ const Navbar = ({cartNav,setLang}) => {
   <header className="header_area">
     <div className="top_menu">
       <div className="container">
-        <div className="row" dir="rtl">
+        <div className="row" >
           <div className="col-lg-6 ">
             <div className="float-left">
-              <p dir="rtl"><i className="fas fa-phone"></i> +212 618 911 741</p>
-              <p dir="rtl"><i className="fas fa-message"></i>email: dattesaljinan@gmail.com</p>
+              <p ><i className="fas fa-phone"></i> +212 618 911 741</p>
+              <p ><i className="fas fa-message"></i>email: dattesaljinan@gmail.com</p>
             </div>
           </div>
           <div className="col-lg-6">
@@ -40,12 +39,12 @@ const Navbar = ({cartNav,setLang}) => {
                 </li>
                 <li>
                   <Link to="/cart">
-                    {translate("Cart")}
+                  {translate("Panier")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/">
-                    compte
+                  {translate("Compte")}
                   </Link>
                 </li>
                 <li>
@@ -96,7 +95,7 @@ const Navbar = ({cartNav,setLang}) => {
                         <Link className="nav-link" to="/produits">{translate("Produits")}</Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/cart">{translate("Cart")} </Link>
+                        <Link className="nav-link" to="/cart">{translate("Panier")} </Link>
                       </li>
                     </ul>
                   </li>
