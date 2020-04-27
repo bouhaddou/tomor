@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import blogApi from '../services/blogApi';
-import produitsApi from '../services/produitsApi';
 import { Link } from 'react-router-dom';
+import PostApi from '../services/PostApi';
+import produitsApi from '../services/produitsApi';
 
 
 
@@ -16,7 +17,7 @@ const BlogPage = () => {
     try{
       const dataProduit = await  produitsApi.findAll();
       setFilterProduit(dataProduit.slice(0,6))
-    const data = await blogApi.findAll()
+    const data = await PostApi.findAll()
     setBlogItem(data)
     setRecentBlog(data.slice(0,4))
   }catch(error){
@@ -30,24 +31,21 @@ const BlogPage = () => {
     
     if(!blogItem){ return <div>Chargement</div>}else{ return ( <>
     
-    <section className="banner_area">
-      <div className="banner_inner d-flex align-items-center">
-        <div className="container">
-          <div
-            className="banner_content d-md-flex justify-content-between align-items-center"
-          >
-            <div className="mb-3 mb-md-0">
-              <h2>Blog</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div className="page_link">
-              <a href="index.html">Home</a>
-              <a href="blog.html">Blog </a>
+    <div className=" container content-header bg-color">
+            <div className="container-fluid">
+              <div className="row mb-2">
+                <div className="col-sm-6">
+                  <h1 className="m-0 text-dark">Produits</h1>
+                </div>
+                <div className="col-sm-6">
+                  <ol className="breadcrumb float-sm-right">
+                    <li className="breadcrumb-item "><Link to="/"> accueil</Link></li>
+                    <li className="breadcrumb-item active">Produits</li>
+                  </ol>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
   <section className="blog_area section_gap">
       <div className="container">
           <div className="row">
@@ -57,7 +55,7 @@ const BlogPage = () => {
                   {blogItem.map(blo =>
                       <article className="blog_item" key={blo.id}>
                         <div className="blog_item_img">
-                          <img className="card-img rounded-0" src={blo.avatar} alt={blo.title}/>
+                          <img style={{ maxHeight: 400  }} className="card-img rounded-0" src={"avatars/" +  blo.avatars[0].filePath}  alt={blo.title}/>
                           <a href="#" className="blog_item_date">
                             <h3>15</h3>
                             <p>Jan</p>
@@ -121,12 +119,13 @@ const BlogPage = () => {
                           <h3 className="widget_title">Recent Post</h3>
                         {recentBlog.length > 0 && recentBlog.map(recent =>
                           <div className="media post_item" key={recent.id}>
-                              <img className="img-fuild" src={recent.avatar} alt={recent.title} />
+                              <img style={{ maxHeight: 150, maxWidth:120  }} className="img-fuild" src={"avatars/" +  recent.avatars[0].filePath} alt={recent.title} />
                               <div className="media-body">
                                   <a href="single-blog.html">
                                       <h3>{recent.title}</h3>
-                                  </a>
-                                  <p>{recent.setAt}</p>
+                                      <h6>{recent.setAt}</h6>
+                                  </a> <p>{recent.content.slice(0,20)}</p>
+                                 
                               </div>
                           </div>
                          )}
@@ -150,7 +149,7 @@ const BlogPage = () => {
                         {filterProduit.length > 0 && filterProduit.map(produit =>   
                             <li key={produit.id}>
                                 <Link to="">
-                                  <img className="img-fluid" src={produit.avatar} alt={produit.title.slice(0,15)} />
+                                  <img className="img-fluid" src={"avatars/" +  produit.avatars[0].filePath} alt={produit.title.slice(0,15)} />
                                 </Link>
                             </li>
                         )}

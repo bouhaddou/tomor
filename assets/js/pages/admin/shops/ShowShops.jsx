@@ -14,14 +14,11 @@ const getProductFunction =async () =>{
    
         if(data)
         {
-            console.log(data.length + "kkk")
-        for(let i = 0;i < data.length ; i++)
-        {
-          somme = somme +  (data[i].produit.prix * data[i].Quantity) 
-         setTotal(somme)
-    
-        }
-     
+            for(let i = 0;i < data.length ; i++)
+            {
+            somme = somme +  (data[i].produit.prix * data[i].Quantity) 
+            setTotal(somme)
+            }
       }  
   }catch(error){
       console.log(error.response)
@@ -32,17 +29,17 @@ useEffect(() =>{
     getProductFunction()
 },[])
 
-
-  if(!Shop){ return <div>Loading</div>}else{  return ( <>
+if(!Shop){ return <div>Loading</div>}else{  return ( <>
  <div className="content-header">
-      <div className="container-fluid">
+      <div className="container-fluid ">
         <div className="row mb-2">
           <div className="col-sm-6">
             <h1 className="m-0 text-dark">Table de bord</h1>
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item"><a>Accueil</a></li>
+            <li className="breadcrumb-item "><Link to="/"> Table de bord</Link></li>
+              <li className="breadcrumb-item "><Link to="/shops"> Ventes</Link></li>
               <li className="breadcrumb-item active">Detaill de Vente</li>
             </ol>
           </div>
@@ -50,7 +47,7 @@ useEffect(() =>{
       </div>
     </div>
      
-    <section className="content">
+    <section className="content m-5">
         <div className="card">
             <div className="card-header">
                 {/* <h3 className="card-title">Information de {Shop.title}</h3> */}
@@ -114,9 +111,9 @@ useEffect(() =>{
                          <th>Référence</th>
                          <th>Titre</th>
                          <th>Image</th>
-                         <th>Quantite</th>
-                         <th>Prix</th>
-                         <th>Total</th>
+                         <th className="text-center">Quantite</th>
+                         <th className="text-center">Prix</th>
+                         <th className="text-center">Total</th>
                     </tr>
                 </thead>
                 <thead>
@@ -125,12 +122,13 @@ useEffect(() =>{
                          <td>{pro.produit.ref}</td>
                          <td>{pro.produit.title}</td>
                          <td>
-                         {/* <img style={{ maxHeight: 60, maxWidth:60  }} className="table-avatar rounded-circle text-center" src={"avatars/" +  pro.produit.avatars[0].filePath} /> */}
-                                image
+                         <img style={{ maxHeight: 60, maxWidth:60  }} 
+                         className="table-avatar rounded-circle text-center" src={"avatars/" +  pro.produit.avatars[0].filePath} />
+                              
                         </td>
-                         <td>{pro.Quantity}</td>
-                         <td>{pro.produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
-                         <td>{ (pro.Quantity * pro.produit.prix).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }</td>
+                         <td className="text-center">{pro.Quantity}</td>
+                         <td className="text-center">{pro.produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</td>
+                         <td className="text-center">{ (pro.Quantity * pro.produit.prix).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }</td>
                     </tr>
                 )}
                 </thead>
@@ -138,11 +136,11 @@ useEffect(() =>{
         </div>
         <hr/>
         <div className="row">
-            <div className="col-md-5">
+            <div className="col-md-5 mb-5">
                 <h3>Adresse de Livraison</h3> 
-                <p>{Shop[0].delivery}</p>
+                <p className="">{Shop[0].delivery}</p>
             </div>
-            <div className="col-md-7">
+            <div className="col-md-7 mb-5">
                 <div className="row">
                     <div className="col-md-7 ">
                         <h4 className="text-right">Montant à payer :</h4>

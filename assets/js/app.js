@@ -21,16 +21,31 @@ import ProduitsPage from './pages/admin/produits/ProduitsPage';
 import produitPage from './pages/admin/produits/produitPage';
 import ShowProduct from './pages/admin/produits/ShowProduct'
 import CategoriesPage from './pages/admin/categories/CategoriesPage';
+import ShowCategorie from './pages/admin/categories/ShowCategorie';
 import CategoriePage from './pages/admin/categories/CategoriePage';
 import CommandePage from './pages/admin/shops/CommandePage';
 import ShowShops from './pages/admin/shops/ShowShops'
 import ContactPage from './pages/admin/contact/ContactPage';
 import PostPage from './pages/admin/post/PostPage';
 import PostsPage from './pages/admin/post/PostsPage';
+import ShowPost from './pages/admin/post/ShowPost';
+import AdminFooter from './Component/AdminFooter';
 LoginApi.setup();
 const App = () => {
     const [cartNav, setCartNav] = useState([])
-
+    const funcNav = () =>{
+      
+           const x = JSON.parse(localStorage.getItem("product"));
+           if(x){
+           setCartNav(x)
+           }
+           console.log(x)
+        
+      }
+      
+      useEffect(() =>{
+        funcNav()
+      },[])
     
     const [isAuthenticated, setIsAuthenticated] = useState(LoginApi.isAuthenticated)  ;
     const PrivatRoute = ({path, isAuthenticated, component}) =>{
@@ -42,9 +57,10 @@ const App = () => {
 
 
     return ( <>
+         <div className="">
         <HashRouter>
             
-            {!isAuthenticated && <Navbar cartNav={cartNav} setCartNav={setCartNav} />}
+            {!isAuthenticated && <Navbar cartNav={cartNav}  />}
             
             {isAuthenticated && <AdminNavbar />}
             {isAuthenticated && <AdminAside />}
@@ -60,11 +76,13 @@ const App = () => {
                 {!isAuthenticated && <Route path="/" render={props=>{return <HomePage setCartNav={setCartNav} {...props} /> }} /> }
                 <div className="content-wrapper">
                 <Switch>
+                <PrivatRoute path="/posts/show/:id" component={ShowPost} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/posts/:id" component={PostPage} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/posts" component={PostsPage} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/AdminContact" component={ContactPage} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/shops/show/:id" component={ShowShops} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/shops" component={CommandePage} isAuthenticated={isAuthenticated}  />
+                <PrivatRoute path="/categories/show/:id" component={ShowCategorie} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/categories/:id" component={CategoriePage} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/categories" component={CategoriesPage} isAuthenticated={isAuthenticated}  />
                 <PrivatRoute path="/product/show/:id" component={ShowProduct} isAuthenticated={isAuthenticated}  />
@@ -76,8 +94,10 @@ const App = () => {
                 </div>
             </Switch>
             {!isAuthenticated &&<Footer />}
+            {isAuthenticated && <AdminFooter />}
         <ToastContainer position={toast.POSITION.BOTTOM_LEFT}/>
         </HashRouter>
+        </div>
     </> );
 }
  

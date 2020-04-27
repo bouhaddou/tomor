@@ -14,8 +14,14 @@ function findbyId(id){
 }
 
      
- 
+function deleteShops(id)
+{
+    return axios
+                .delete("http://localhost:8000/api/shops/" + id)
+                .then(response => console.log(response))
+}    
 export default{
     findAll,
     findbyId,
+    deleteShops
 };

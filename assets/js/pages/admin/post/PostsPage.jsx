@@ -15,46 +15,46 @@ const PostsPage = () => {
            console.log(error.response)
        }
     }
-    
-    
-    
+
     useEffect(() => {
       fetchPosts();
     }, []);
     const handleChange = (id) =>{
         setCurrentPage(id);
     }
+
     const itemsPerPage = 6 ;
     const PaginationPosts = Pagination.getData(currentPage,itemsPerPage,Posts);
-console.log(Posts)
+
    if(!Posts){ return <div>chargement</div>}else{ return ( <>
     <div className="content-header">
       <div className="container-fluid">
         <div className="row mb-2">
           <div className="col-sm-6">
-            <h1 className="m-0 text-dark">Table de bord</h1>
+            <h1 className="m-0 text-dark">Annonces</h1>
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item"><a>Accueil</a></li>
-              <li className="breadcrumb-item active">Table de bord</li>
+            <li className="breadcrumb-item "><Link to="/"> Table de bord</Link></li>
+              <li className="breadcrumb-item active"> Annonces</li>
             </ol>
           </div>
         </div>
       </div>
     </div>
-     <h2 className="mt-2 text-center">Liste des Posts</h2>
+     <h2 className="mt-2 text-center">Liste des Annonces</h2>
     <div className="container">
         <div className="card mt-3">
               <div className="card-header">
-                <h3 className="card-title text-danger">Posts ( {Posts.length} Posts)</h3>
-                <h3 className="card-title text-danger float-right"><Link to="/product/new">Ajouter un Posts</Link></h3>
+                <h3 className="card-title text-danger">Posts ( {Posts.length} Annonces)</h3>
+                <h3 className="card-title text-danger float-right">
+                  <Link to="/posts/new"  className="btn btn-block bg-gradient-warning btn-xs">Ajouter une Annonce</Link></h3>
               </div>
               <div className="card-body p-0">
                 <table className="table table-condensed">
                   <thead>
                     <tr>
-                      <th >Titre</th>
+                      <th>Titre</th>
                       <th>Image</th>
                       <th>Date</th>
                       <th className="text-center">Content</th>
@@ -67,9 +67,9 @@ console.log(Posts)
                       <td>{post.title}</td>
                       <td className="">
                           <ul className="list-inline text-center">
-                            { post.images != 0 && post.images.map((image) =>
+                            { post.avatars != 0 && post.avatars.map((image) =>
                               <li className="list-inline-item" key={image.id}>
-                                  <img style={{ maxHeight: 60, maxWidth:60  }} className="table-avatar rounded-circle text-center" src={"images/" +  image.filePath} alt={post.title} />
+                                  <img style={{ maxHeight: 60, maxWidth:60  }} className="table-avatar rounded-circle text-center" src={"avatars/" +  image.filePath} alt={post.title} />
                               </li>
                             )}
                           </ul>

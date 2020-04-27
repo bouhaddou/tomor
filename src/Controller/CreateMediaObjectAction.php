@@ -56,16 +56,5 @@ class CreateMediaObjectAction
            $this->validator->validate($avatar)
        );
 
-
-        // $uploadedFile = $request->files->get('contentUrl');  
-       
-        // if (!$uploadedFile) {
-        //     throw new BadRequestHttpException('"file" is required');
-        // }
-
-       
-        // $avatar->file = $uploadedFile;
-
-        // return $avatar;
      }
 }

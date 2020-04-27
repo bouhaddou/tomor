@@ -2,74 +2,65 @@
 
 namespace App\Entity;
 
-use App\Entity\Image;
+use App\Entity\Avatar;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\PrePersist;
-use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AnnonceRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ApiResource(
- *  normalizationContext={
- *      "groups"={"post_read","media_object_read"}
+ * normalizationContext={
+ *      "groups"={"annonce_read","media_object_read"}
  * }
- *
  * )
  */
-class Post
+class Annonce
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"annonce_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"post_read","media_object_read"})
+     * @Groups({"annonce_read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"post_read","media_object_read"})
+     * @Groups({"annonce_read"})
      */
     private $content;
 
     /**
-     * @var Image|null
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image")
-     * @ORM\JoinColumn()
-     * ApiSubresource()
-     * @Groups({"post_read"})
-     */
-    public $images;
-
-    /**
-     * @ORM\Column(type="date")
-     * @Groups({"post_read","media_object_read"})
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"annonce_read"})
      */
     private $setAt;
 
     /**
-     * @ORM\PrePersist
+     * @var Avatar|null
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Avatar")
+     * @ORM\JoinColumn()
+     * ApiSubresource()
+     * @Groups({"annonce_read"})
      */
+    public $avatars;
+    /**
+     * Undocumented function
+     * @ORM\PrePersist
+     */ 
     public function dddsdad()
     {
         $this->setAt = new \DateTime();
-    }
-
-    public function __construct()
-    {
-        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,6 +76,7 @@ class Post
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -105,29 +97,10 @@ class Post
         return $this->setAt;
     }
 
-    public function setSetAt(\DateTimeInterface $setAt): self
+    public function setSetAt(?\DateTimeInterface $setAt): self
     {
         $this->setAt = $setAt;
+
         return $this;
     }
-
-        /**
-     * @return Collection|Image[]
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addAvatar(Image $image)
-    {
-            $this->images->add($image);
-
-    }
-    public function removeImage(Image $image)
-    {
-            $this->images->removeElement($image);
-
-    }
-    
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import produitsApi from '../../../services/produitsApi';
 import { Link } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 const ShowProduct = (props) => {
     const {id} = props.match.params;
 const [produit, setProduit] = useState(undefined);
@@ -18,18 +18,29 @@ useEffect(() =>{
     getProductFunction()
 },[])
 
+const handleDelete = async (id) =>{
+    const tableorigine = [...produit];
+    setProduit(produit.filter(produi => produi.id !== id));
+    try{
+        await  produitsApi.deleteProduits(id)
+        toast.error(" le Produit a été supprimée avec succès ")
+    }catch(error){
+            setProduits(tableorigine);
+    }
+}
 
   if(!produit){ return <div>Loading</div>}else{  return ( <>
  <div className="content-header">
       <div className="container-fluid">
         <div className="row mb-2">
           <div className="col-sm-6">
-            <h1 className="m-0 text-dark">Table de bord</h1>
+            <h1 className="m-0 text-dark">Informations de produit</h1>
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item"><a>Accueil</a></li>
-              <li className="breadcrumb-item active">Table de bord</li>
+            <li className="breadcrumb-item "><Link to="/"> Table de bord</Link></li>
+              <li className="breadcrumb-item "><Link to="/product"> produit</Link></li>
+              <li className="breadcrumb-item active">Information de produit</li>
             </ol>
           </div>
         </div>
@@ -97,10 +108,16 @@ useEffect(() =>{
                               </i>  Modifier
                              
                           </Link>
-                          <Link to="/product/delete/" className="btn btn-danger btn-sm mr-1">
+                          <button 
+                             onClick={() => handleDelete(produit.id)}
+                            disabled={produit.shops.length > 0}
+                            className="btn btn-danger btn-sm mr-1">
                               <i className="fas fa-trash">
                               </i>   Supprimer
-                            
+                          </button>
+                          <Link to="/product"  className="btn btn-info btn-sm mr-1" >
+                            <i className="fas fa-back"> 
+                            </i>  Retour
                           </Link>
                    </td>
                </tr>

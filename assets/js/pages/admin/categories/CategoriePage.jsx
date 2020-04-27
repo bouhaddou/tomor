@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import FieldsAd from '../../../Component/forms/FieldsAd';
 import CategorieApi from '../../../services/CategorieApi';
-import Select from '../../../Component/forms/Select';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 
 const CategoriePage = (props) => {
@@ -17,7 +17,6 @@ const CategoriePage = (props) => {
       title:"",
       content:""
     })
- console.log(id)
 
     const CategorieItem =async () =>{
        
@@ -49,6 +48,7 @@ const CategoriePage = (props) => {
                 await axios.put("http://localhost:8000/api/categories/"+ id,categorie);
                   toast.success("La categorie a été Modifier Avec succée ")
                 props.history.push('/categories');
+                
 
             }else{
               await axios.post("http://localhost:8000/api/categories",categorie);
@@ -74,18 +74,24 @@ const CategoriePage = (props) => {
       <div className="container-fluid">
         <div className="row mb-2">
           <div className="col-sm-6">
-            <h1 className="m-0 text-dark">Table de bord</h1>
+            <h1 className="m-0 text-dark">
+            {!editing ? <span> Ajouter une catégorie </span> : <span> Modifier une catégorie </span> }
+            </h1>
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item"><a href="#">Accueil</a></li>
-              <li className="breadcrumb-item active">Table de bord</li>
+              <li className="breadcrumb-item "><Link to="/"> Table de bord</Link></li>
+              <li className="breadcrumb-item "><Link to="/categories"> Categories</Link></li>
+              <li className="breadcrumb-item active">
+              {!editing ? <span> Ajouter une catégorie </span> : <span> Modifier une catégorie </span> }
+              </li>
             </ol>
           </div>
         </div>
     </div>
     </div>
-    <h2 className="text-center mt-2 mb-2">Ajouter une Catégorie</h2>        
+     {editing  ? <h2 className="text-center mt-2 mb-2">Modifier une Catégorie</h2> :  
+     <h2 className="text-center mt-2 mb-2">Ajouter une Catégorie</h2> }      
     <div className="card card-primary container">
               <div className="card-header">
                 <h3 className="card-title">Information de la categorie</h3>
@@ -108,7 +114,11 @@ const CategoriePage = (props) => {
                 />
                 </div>
                 <div className="card-footer">
-                  <button type="submit" className="btn btn-primary">Sauvgarder</button>
+                  <button type="submit" className="btn btn-success m-2">Sauvegarder</button>
+                  <Link to="/categories"  className="btn btn-primary" >
+                      <i className="fas fa-back"> 
+                      </i>  Retour
+                  </Link>
                 </div>
               </form>
             </div>

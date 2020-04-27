@@ -20,9 +20,7 @@ const AdminNavbar = (props) => {
 
 const handelLogout = () =>{
   LoginApi.logout();
- 
 }
-
 
  return ( <>
   <nav className="main-header navbar navbar-expand navbar-white navbar-light">
@@ -37,10 +35,6 @@ const handelLogout = () =>{
         <Link to="/AdminContact" className="nav-link">Contact</Link>
       </li>
     </ul>
-
-
-    
-
 
     <ul className="navbar-nav ml-auto">
       <li className="nav-item dropdown">
@@ -124,11 +118,12 @@ const handelLogout = () =>{
           <a href="#" className="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <li className="nav-item">
-        <button className="nav-link" onClick={handelLogout}>
+      <li className="nav-item mr-1">
+        <a className="btn btn-block btn-outline-success btn-sm mt-1 ml-2 mr-3" onClick={handelLogout}>
             Se déconnecter
-        </button>
+        </a>
       </li>
+      
     </ul>
   </nav>
     </> 

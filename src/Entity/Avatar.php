@@ -16,7 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity
  * @ApiResource(
  *     normalizationContext={
- *         "groups"={"produit_read","media_object_read"}
+ *         "groups"={"media_object_read"}
  *     },
  *     collectionOperations={
  *         "post"={
@@ -37,7 +37,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
      * @ORM\Id
-     * @Groups({"produit_read","media_object_read"})
+     * @Groups({"media_object_read","media_object","shops_read"})
      */
     protected $id;
 
@@ -47,7 +47,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
      *
      * 
      * @Vich\UploadableField(mapping="avatars", fileNameProperty="filePath")
-     * @Groups({"produit_read","media_object_read"})
+     * @Groups({"media_object_read","media_object","shops_read"})
      * @Assert\NotBlank(message="Aucune image n'a été trouvée")
      * @Assert\File(
      *     maxSize = "3072k",
@@ -61,7 +61,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
      * @var string|null
      *
      * @ORM\Column(nullable=true)
-     * @Groups({"produit_read","media_object_read"})
+     * @Groups({"media_object_read","media_object","shops_read"})
      */
     public $filePath;
 

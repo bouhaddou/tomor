@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from '../../../Component/Pagination';
 import ShopsApi from '../../../services/ShopsApi';
-
+import { toast } from 'react-toastify';
 
 const CommandePage = () => {
     const [Shops, setShops] = useState([])
@@ -15,29 +15,37 @@ const CommandePage = () => {
            console.log(error.response)
        }
     }
-    
-    
-    
     useEffect(() => {
       fetchShops();
     }, []);
     const handleChange = (id) =>{
         setCurrentPage(id);
     }
+
     const itemsPerPage = 6 ;
     const PaginationShops = Pagination.getData(currentPage,itemsPerPage,Shops);
 
+    const handleDelete = async (id) =>{
+      const tableorigine = [...Shops];
+      setShops(Shops.filter(shop => shop.id !== id));
+      try{
+          await  ShopsApi.deleteShops(id)
+          toast.error(" la vente  a été supprimée avec succès ")
+      }catch(error){
+              setProduits(tableorigine);
+      }
+    }
    if(!Shops){ return <div>chargement</div>}else{ return ( <>
     <div className="content-header">
       <div className="container-fluid">
         <div className="row mb-2">
           <div className="col-sm-6">
-            <h1 className="m-0 text-dark">Table de bord</h1>
+            <h1 className="m-0 text-dark">Ventes</h1>
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item"><a>Accueil</a></li>
-              <li className="breadcrumb-item active">Shops</li>
+              <li className="breadcrumb-item "><Link to="/"> Table de bord</Link></li>
+              <li className="breadcrumb-item active"> Ventes</li>
             </ol>
           </div>
         </div>
@@ -66,24 +74,22 @@ const CommandePage = () => {
                     <tr key={shop.id}>
                       <td>{shop.client.firstName} {shop.client.lastName}</td>
                       <td className="">{shop.produit.title}</td>
-                      <td className="">{shop.Quantity}</td>
-                      <td className="">{shop.produit.prix}</td>
-                      <td className="">{shop.prix * shop.Quantity }</td>
-                      <td className="project-actions text-right">
+                      <td className="text-center">{shop.Quantity}</td>
+                      <td className="text-center">{shop.produit.prix}</td>
+                      <td className="text-center">{shop.produit.prix * shop.Quantity }</td>
+                      <td className=" text-center">
                           <Link to={"/shops/show/" + shop.client.id} className="btn btn-primary btn-sm mr-1" >
                               <i className="fas fa-folder"> 
                               </i>     Voir
-                          
                           </Link>
-                          <Link to="/shops/delete" className="btn btn-danger btn-sm mr-1">
+                          <button 
+                            onClick={() => handleDelete(shop.id)}
+                            className="btn btn-danger btn-sm mr-1">
                               <i className="fas fa-trash">
                               </i>   Supprimer
-                            
-                          </Link>
+                          </button>
                       </td>
-                      <td>
                       
-                      </td>
                     </tr>
                 )}
                   </tbody>
@@ -91,7 +97,6 @@ const CommandePage = () => {
               </div>
             </div>
             </div>
-           
             <div className="d-flex justify-content-center">
             <Pagination 
                 currentPage={currentPage} 

@@ -1,20 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Heebo:300,400,500,700|Roboto:300,400,500");
 
-body{line-height:24px;
-    
-        background-color: #f5f2f0;
-    
-    font-size:14px;
 
-    font-family:"Roboto",sans-serif;
-    font-weight:normal;
-    color:#797979}h1,h2,h3,h4,h5,h6{font-family:"Heebo",sans-serif;
-    color:#2a2a2a;
-    font-weight:500}button:focus{outline:none;
-    box-shadow:none}del{color:#797979;
-    font-size:14px;
-    font-weight:300;
-    font-family:"Heebo",sans-serif}
     .list{list-style:none;
     margin:0px;
     padding:0px}a{text-decoration:none;
@@ -29,7 +15,7 @@ body{line-height:24px;
     .section_gap_bottom_custom{padding-bottom:0px}@media (max-width: 991px){.section_gap_bottom_custom{padding-bottom:30px}}
     .section_gap_top{padding-top:120px}@media (max-width: 1224px){.section_gap_top{padding-top:80px}}
     .main_title{text-align:center;
-    margin-bottom:75px}@media (max-width: 991px){.main_title{margin-bottom:45px}}
+    margin-bottom:35px}@media (max-width: 991px){.main_title{margin-bottom:45px}}
     .main_title h2{font-size:24px;
     color:#2a2a2a;
     margin-bottom:30px;
@@ -158,7 +144,7 @@ body{line-height:24px;
     -webkit-transition:transform 500ms ease, background 500ms ease;
     box-shadow:0px 3px 16px 0px rgba(0,0,0,0.1)}
     .header_area.navbar_fixed .main_menu .navbar .nav .nav-item .nav-link{line-height:70px}
-    .top_menu{background:#f6f6f6;
+    .top_menu{
     height:30px;
     line-height:16px}
     .top_menu .float-left{padding:7px 0}
@@ -414,7 +400,7 @@ body{line-height:24px;
     .offer_content p{margin-bottom:0px}
     .single-feature{padding:30px 15px;
     text-align:center;
-    border:1px solid #eff2f3;
+   
     }
     .single-feature h3{font-size:15px;
     font-weight:500;
@@ -1792,7 +1778,7 @@ body{line-height:24px;
             line-height:50px;
             border-radius:5px}.green_btn:hover{background-position:right center;
             color:#fff}.single-product{text-align:center;
-            margin-bottom:50px}.single-product .product-img{position:relative;
+            margin-bottom:50px}.single-product .product-img{position:relative; border-radius: 10px;
             overflow:hidden}.single-product .product-img .p_icon{width:90%;
             padding:7px 30px;
             position:absolute;
@@ -1815,9 +1801,9 @@ body{line-height:24px;
             margin-right:25px}.single-product .product-img .p_icon a:last-child{margin-right:0px}.single-product .product-img .p_icon a:hover{color:#fff;
             background:#71cd14}.single-product .product-btm{padding:22px 25px 18px;
             border:1px solid #f0f2f1;
-            text-align:left}.single-product .product-btm h4{color:#4a4a4a;
-            font-size:14px;
-            font-weight:400;
+            text-align:left}.single-product .product-btm h4{
+            font-size:17px;
+            
             text-transform:uppercase;
             margin-bottom:0px;
             transition:all 300ms linear 0s}.single-product .product-btm h5{margin-bottom:0px;
@@ -2449,7 +2435,7 @@ body{line-height:24px;
                         left:-12%;
                         transition:all 300ms linear 0s}
                         .footer-area .single-footer-widget .click-btn:hover{opacity:.8}
-                        .footer-area .footer-bottom{margin-top:50px}@media (max-width: 991px){.footer-area .footer-bottom{margin-top:20px}}
+                        .footer-area .footer-bottom{}@media (max-width: 991px){.footer-area .footer-bottom{margin-top:20px}}
                         .footer-area .footer-bottom p{color:#ffffff}
                         .footer-area .footer-bottom a,.footer-area .footer-bottom span{color:#71cd14}
                         .footer-area .footer-bottom span{font-weight:700}
@@ -2472,9 +2458,23 @@ body{line-height:24px;
                         .prix{
                             width: 120px;
                         }
-                      .colorback{
-                          background-color: white;
-                      }
-                      .disabled-link {
-                        pointer-events: none;
-                      }
+                   
+                        .backCOLO{
+                            background-color: #e9ecef;
+                        }
+                        .bg-color{
+                            border-bottom:1px solid #50b455;
+                            border-top:1px solid #50b455;
+                            background-color: #ebf9ef;
+                        }
+                        .product-btm{
+                            background-color: #fafff0;
+                        }
+                        .navbar-badge1 {
+                            font-size: .6rem;
+                            font-weight: 300;
+                            padding: 4px;
+                            position: absolute;
+                            right: 55px;
+                            top: 14px;
+                        }

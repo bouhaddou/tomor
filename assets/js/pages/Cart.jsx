@@ -81,24 +81,21 @@ const handleRemoveItem = (event) =>{
 
 if(!cart){return <div>loading</div>}else{ return ( <>
     
-    <section className="banner_area">
-      <div className="banner_inner d-flex align-items-center">
-        <div className="container">
-          <div
-            className="banner_content d-md-flex justify-content-between align-items-center"
-          >
-            <div className="mb-3 mb-md-0">
-              <h2>Cart</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div className="page_link">
-              <a href="index.html">Home</a>
-              <a href="cart.html">Cart</a>
-            </div>
+    <div className=" container content-header bg-color">
+      <div className="container-fluid">
+        <div className="row mb-2">
+          <div className="col-sm-6">
+            <h1 className="m-0 text-dark">Produits</h1>
+          </div>
+          <div className="col-sm-6">
+            <ol className="breadcrumb float-sm-right">
+              <li className="breadcrumb-item "><Link to="/"> accueil</Link></li>
+              <li className="breadcrumb-item active">Produits</li>
+            </ol>
           </div>
         </div>
       </div>
-    </section>
+    </div>
     <section className="cart_area">
       <div className="container">
         <div className="cart_inner">
@@ -123,7 +120,7 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                   <td>
                       <div className=" imag-pro">
                         <img className=""
-                          src={produit.avatar}
+                           src={"avatars/" +  produit.image } alt={produit.title}
                           alt=""
                         />
                       </div>
@@ -133,7 +130,7 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                           <p>{produit.title}</p> 
                       </div></td>
                   <td>
-                    <h4 className="prix">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs </h4> 
+                    <h5 className="prix">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs </h5> 
                   </td>
                   <td>
                     <div className="prix">

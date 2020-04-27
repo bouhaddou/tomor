@@ -22,7 +22,7 @@ const Produits = (props) => {
          setFilterProduit(data.slice(0,6))
          const nombre = Math.floor(Math.random() * (data.length - 1 + 1)) + 1;
          setBestProduct(data[nombre])
-         this.props.setCartNav({})
+         
    }catch(error){
        console.log(error.response)
    }
@@ -42,11 +42,13 @@ const handleShop =(param) => {
         if(data === null)
         {
           const quantity= 1
-          const {id,title, avatar, prix} = param
-          localStorage.setItem("product",JSON.stringify([{id,title, avatar, prix,quantity}]))
-          props.setCartNav({id,title, avatar, prix,quantity})
+          const image = param.avatars[0].filePath
+          const {id,title, prix} = param
+          localStorage.setItem("product",JSON.stringify([{id,title, image, prix,quantity}]))
+          props.setCartNav({id,title, image, prix,quantity})
         }else{
-          const {id,title, avatar, prix} = param
+          const image = param.avatars[0].filePath
+          const {id,title, prix} = param
           const proLocal = JSON.parse(localStorage.getItem("product"));
           const  existid = proLocal.filter(produit => produit.id === id)
           if(existid.length > 0)
@@ -57,40 +59,37 @@ const handleShop =(param) => {
             localStorage.setItem("product",JSON.stringify(proLocal))
           }else{
           const quantity= 1
-          proLocal.push({id,title, avatar, prix,quantity})
+          proLocal.push({id,title, image, prix,quantity})
           localStorage.setItem("product",JSON.stringify(proLocal))
           }
           props.setCartNav(proLocal)
         }
         toast.success("le produit est ajouter au panier avec succée")
 }
-
+console.log(produits)
    if(!produits){
       return <div>loading</div>}else{ return ( <>
-            <section className="banner_area">
-      <div className="banner_inner d-flex align-items-center">
-        <div className="container">
-          <div
-            className="banner_content d-md-flex justify-content-between align-items-center"
-          >
-            <div className="mb-3 mb-md-0">
-              <h2>Produits</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div className="page_link">
-              <a href="index.html">Home</a>
-              <a href="cart.html">Cart</a>
+      <div className=" container content-header bg-color">
+            <div className="container-fluid">
+              <div className="row mb-2">
+                <div className="col-sm-6">
+                  <h1 className="m-0 text-dark">Produits</h1>
+                </div>
+                <div className="col-sm-6">
+                  <ol className="breadcrumb float-sm-right">
+                    <li className="breadcrumb-item "><Link to="/"> accueil</Link></li>
+                    <li className="breadcrumb-item active">Produits</li>
+                  </ol>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-        <section className="cat_product_area section_gap">
+        <section className="cat_product_area section_gap ">
             <div className="container">
                 <div className="row flex-row-reverse">
                     <div className="col-lg-9">
                     <section className="inspired_product_area section_gap_bottom_custom">
-                    <div className="container">
+                    <div className="container card card-success card-outline">
                       <div className="row justify-content-center">
                         <div className="col-lg-12">
                           <div className="main_title">
@@ -100,14 +99,13 @@ const handleShop =(param) => {
                         </div>
                       </div>
 
-                      <div className="row">
+                      <div className="row   ">
+                      
                           {produits.length >0 && produits.map(produit =>
                             <div key={produit.id} className="col-lg-4 col-md-6 col-sm-12">
                               <div className="single-product">
                                 <div className="product-img">
-                                
                                   <img style={{ maxHeight: 165  }}  className="img-fluid w-100 h-100" src={"avatars/" +  produit.avatars[0].filePath} />
-                               
                                   <div className="p_icon">
                                       <Link  to={"/ProductInfo/" + produit.id } >
                                         <i className="ti-eye"></i>
@@ -122,7 +120,7 @@ const handleShop =(param) => {
                                   <h4 className="text-info text-center">{produit.title.slice(0,22)}</h4>
                                   </Link>
                                   <div className="mt-3 text-center">
-                                    <h6 className="mr-4 text-center text-danger text-center">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs</h6>
+                                    <h6 className="text-center text-danger text-center">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs</h6>
                                   </div>
                                 </div>
                               </div>

@@ -13,9 +13,16 @@ function findbyId(id){
                 .then(response => response.data);
 }
 
+function deleteCategorie(id)
+{
+    return axios
+                .delete("http://localhost:8000/api/categories/" + id)
+                .then(response => console.log(response))
+} 
      
  
 export default{
     findAll,
     findbyId,
+    deleteCategorie
 };

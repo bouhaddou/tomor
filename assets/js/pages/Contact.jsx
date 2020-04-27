@@ -52,22 +52,21 @@ const Contact = () => {
   }
 
     return ( <>
-    <section className="banner_area">
-      <div className="banner_inner d-flex align-items-center">
-        <div className="container">
-          <div className="banner_content d-md-flex justify-content-between align-items-center" >
-            <div className="mb-3 mb-md-0">
-              <h2> contactez Nous</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div className="page_link">
-              <a href="index.html">Accueil</a>
-              <a href="contact.html"> contacte</a>
+      <div className=" container content-header bg-color">
+            <div className="container-fluid">
+              <div className="row mb-2">
+                <div className="col-sm-6">
+                  <h1 className="m-0 text-dark">Produits</h1>
+                </div>
+                <div className="col-sm-6">
+                  <ol className="breadcrumb float-sm-right">
+                    <li className="breadcrumb-item "><Link to="/"> accueil</Link></li>
+                    <li className="breadcrumb-item active">Produits</li>
+                  </ol>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
   <section className="section_gap">
     <div className="container">

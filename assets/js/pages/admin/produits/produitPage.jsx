@@ -6,6 +6,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Images from '../../../Component/Images';
 import produitsApi from '../../../services/produitsApi';
+import { Link } from 'react-router-dom';
 
 const produitPage = (props) => {
     const {id = "new"} = props.match.params;
@@ -38,7 +39,6 @@ const produitPage = (props) => {
           
             if(id != "new"){
               const data2 = await produitsApi.findbyId(id)
-              console.log(data2.avatars)
               setProduit(data2)
               setEditing(true)
               setFileImage(data2.avatars)
@@ -133,24 +133,30 @@ const handleDeleteImage = id =>{
         setFileImage(fileImage.filter(fileimg => fileimg.id !== id));
       
 }
-console.log(produit)
-  if(!categories){ return <div>chargement</div>}else{ return ( <>
+
+if(!categories){ return <div>chargement</div>}else{ return ( <>
     <div className="content-header">
       <div className="container-fluid">
         <div className="row mb-2">
           <div className="col-sm-6">
-            <h1 className="m-0 text-dark">Table de bord</h1>
+            <h1 className="m-0 text-dark">
+            {!editing ? <span> Ajouter un produit </span> : <span> Modifier un produit </span> }
+            </h1>
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item"><a href="#">Accueil</a></li>
-              <li className="breadcrumb-item active">Table de bord</li>
+            <li className="breadcrumb-item "><Link to="/"> Table de bord</Link></li>
+              <li className="breadcrumb-item "><Link to="/product"> produit</Link></li>
+              <li className="breadcrumb-item active">
+              {!editing ? <span> Ajouter un produit </span> : <span> Modifier un produit </span> }
+              </li>
             </ol>
           </div>
         </div>
     </div>
     </div>
-    <h2 className="text-center mt-2 mb-2">Ajouter un Produit</h2>        
+    {!editing ? <h2 className="text-center mt-2 mb-3">Ajouter un Produit</h2> :
+      <h2 className="text-center mt-2 mb-3">Modifier un Produit</h2> }      
     <div className="card card-primary container">
               <div className="card-header">
                 <h3 className="card-title">Information Produit</h3>
@@ -208,7 +214,11 @@ console.log(produit)
                 />
                 </div>
                 <div className="card-footer">
-                  <button type="submit" className="btn btn-primary">Sauvgarder</button>
+                  <button type="submit" className="btn btn-success mr-2">Sauvegarder</button>
+                  <Link to="/product"  className="btn btn-primary" >
+                      <i className="fas fa-back"> 
+                      </i>  Retour
+                  </Link>
                 </div>
               </form>
             </div>

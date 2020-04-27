@@ -49,6 +49,7 @@ const Checkout = ({props}) => {
     delivery:""
   }])
   const [type,setType] = useState("");
+  const [delivery,setDelivery] = useState("");
   const [status,setStatus] = useState(false);
   const [clientId,setClientId] = useState();
   const [produit,setProduit] = useState({})
@@ -88,7 +89,7 @@ const Checkout = ({props}) => {
   // try{
     for( let i=0 ; i < donnee.length; i++ )
     { 
-      element.push({produit:donnee[i].id,client:response.data.id,quantity: parseFloat(donnee[i].quantity),type:type,status:status,delivery:shop.delivery})
+      element.push({produit:donnee[i].id,client:response.data.id,quantity: parseFloat(donnee[i].quantity),type:type,status:status,delivery:delivery})
     }  
     
     for(let j=0; j<element.length;j++){
@@ -128,6 +129,10 @@ const Checkout = ({props}) => {
     if(name == "type"){
     setType(value)
     }
+    if(name == "delivery")
+    {
+      setDelivery(value);
+    }
     if(name == "status"){
       setStatus(checked)
     }
@@ -142,24 +147,21 @@ const Checkout = ({props}) => {
 
     return ( <>
     
-    <section className="banner_area">
-      <div className="banner_inner d-flex align-items-center">
-        <div className="container">
-          <div
-            className="banner_content d-md-flex justify-content-between align-items-center"
-          >
-            <div className="mb-3 mb-md-0">
-              <h2>Paiement du produit</h2>
-              <p>.............</p>
-            </div>
-            <div className="page_link">
-              <a href="index.html">Accueil</a>
-              <a href="checkout.html">Paiement</a>
+    <div className=" container content-header bg-color">
+            <div className="container-fluid">
+              <div className="row mb-2">
+                <div className="col-sm-6">
+                  <h1 className="m-0 text-dark">Produits</h1>
+                </div>
+                <div className="col-sm-6">
+                  <ol className="breadcrumb float-sm-right">
+                    <li className="breadcrumb-item "><Link to="/"> accueil</Link></li>
+                    <li className="breadcrumb-item active">Produits</li>
+                  </ol>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
     <section className="checkout_area section_gap">
       <div className="container">
         <div className="returning_customer">
@@ -306,10 +308,12 @@ const Checkout = ({props}) => {
                   <div >
                     <textarea
                       className="form-control"
-                      name="message"
-                      id="message"
+                      name="delivery"
+                      value={shop.delivery}
+                      id={shop.delivery}
                       rows="5"
                       placeholder="Notes d'ordre"
+                      onChange={handleChange}
                     ></textarea>
                   </div>
                 </div>

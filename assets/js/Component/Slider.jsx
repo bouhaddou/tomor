@@ -14,21 +14,21 @@ const Slider = () => {
     <div className="carousel-item active">
       <img src="./img/product/tomor2.jpg" className="d-block w-100" alt="..." />
       <div className="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
+        <h5 className="text-success" > First slide label</h5>
         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
       </div>
     </div>
     <div className="carousel-item">
       <img src="./img/product/tomor.jpg" className="d-block w-100" alt="..." />
       <div className="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
+        <h5 className="text-success" > Second slide label</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
     </div>
     <div className="carousel-item">
       <img src="./img/product/newsbg.jpg" className="d-block w-100" alt="..." />
       <div className="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
+        <h5 className="text-success" > Third slide label</h5>
         <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
       </div>
     </div>
@@ -43,14 +43,14 @@ const Slider = () => {
   </a>
 </div>
 
-  <section className="feature-area section_gap_bottom_custom">
+  <section className=" container feature-area section_gap_bottom_custom card card-success card-outline mt-2">
     <div className="container">
       <div className="row">
         <div className="col-lg-4 col-md-6">
           <div className="single-feature">
             <a href="#" className="title">
               <i className="flaticon-money"></i>
-              <h3>Paiement à réception</h3>
+              <h3 className="text-success">Paiement à réception</h3>
             </a>
             <p>Votre confiance est importante pour nous</p>
           </div>
@@ -60,7 +60,7 @@ const Slider = () => {
           <div className="single-feature">
             <a href="#" className="title">
               <i className="flaticon-truck"></i>
-              <h3>Livraison à domicile</h3>
+              <h3 className="text-success">Livraison à domicile</h3>
             </a>
             <p>Ce service est disponible dans toutes les villes du Maroc, 
               le délai maximum de réception est de 7 jours</p>
@@ -71,7 +71,7 @@ const Slider = () => {
           <div className="single-feature">
             <a href="#" className="title">
               <i className="flaticon-support"></i>
-              <h3>Produit de haute qualité</h3>
+              <h3 className="text-success">Produit de haute qualité</h3>
             </a>
             <p>Afin de vous satisfaire, nous vous proposons le meilleur de ce qui est disponible sur le marché marocain</p>
           </div>

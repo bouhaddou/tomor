@@ -11,7 +11,8 @@ const ImagesPost = ({fileImage,handleDeleteImage}) => {
             <div key={image.id} className="col-md-3 border m-1 mb-2">
                  <button  onClick={() => handleDeleteImage(image.id)}
                  className="float-right text-danger btn"><i className="fas fa-times"></i></button>
-                    <img style={{ maxWidth: 200, maxHeight: 150 , height: 149  }} className="img-fuild w-100 h-100 mb-2" key={image.id} className="img-fluid w-100" src={"images/" +  image.filePath} />
+                    <img style={{ maxWidth: 200, maxHeight: 150 , height: 149  }} 
+                    className="img-fuild w-100 h-100 mb-2" key={image.id} className="img-fluid w-100" src={"images/" +  image.filePath} />
             </div>
          )} 
         </div>

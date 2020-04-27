@@ -5,12 +5,15 @@ import Slider from '../Component/Slider';
 import produitsApi from '../services/produitsApi';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import PostApi from '../services/PostApi';
 
 const HomePage = (props) => {
     const [produits,setProduits] = useState({});
     const [filterProduit,setFilterProduit] = useState({});
     const [bestProduct,setBestProduct] = useState(undefined);
     const [edi,setEdi] = useState(false);
+    const [blogs , setBlogs] =useState({})
+
 
   
   
@@ -21,8 +24,9 @@ const HomePage = (props) => {
         setProduits(data);
         setFilterProduit(data.slice(0,6))
         const nombre = Math.floor(Math.random() * (data.length - 1 )) + 1;
-        console.log(data[nombre])
         setBestProduct(data[nombre])
+        const blogs = await PostApi.findAll()
+        setBlogs(blogs.slice(0,3))
         this.props.setCartNav({})
    }catch(error){
        console.log(error.response)
@@ -67,14 +71,13 @@ const handleShop =(param) => {
     toast.success("le produit est ajouter au panier avec succée")
 }
 
-console.log(bestProduct)
     if(!produits){
     return <div>loading</div>}else{ 
         return ( <>
             <Slider />
            
   <section className="inspired_product_area section_gap_bottom_custom">
-    <div className="container">
+    <div className="container card card-success card-outline">
       <div className="row justify-content-center">
         <div className="col-lg-12">
           <div className="main_title">
@@ -144,89 +147,41 @@ console.log(bestProduct)
       <div className="row justify-content-center">
         <div className="col-lg-12">
           <div className="main_title">
-            <h2><span>latest blog</span></h2>
-            <p>Bring called seed first of third give itself now ment</p>
+            <h2><span>DERNIER BLOG</span></h2>
+            <p>Ici, nous vous proposons des articles utiles sur les dates ... 
+              et tout ce qui concerne les dates marocaines</p>
           </div>
         </div>
       </div>
-
-      <div className="row">
-        <div className="col-lg-4 col-md-6">
+     
+      <div className="row"> 
+      {blogs.length > 0 && blogs.map(blog => 
+        <div key={blog.id} className="col-lg-4 col-md-6">
           <div className="single-blog">
             <div className="thumb">
-              <img className="img-fluid" src="img/b1.jpg" alt="" />
+               <img style={{ maxHeight:300, height:300 }}   className="img-fluid w-100 h-100" 
+                          src={"avatars/" +  blog.avatars[0].filePath } alt={blog.title} />
             </div>
             <div className="short_details">
               <div className="meta-top d-flex">
-                <a href="#">By Admin</a>
-                <a href="#"><i className="ti-comments-smiley"></i>2 Comments</a>
+                <a href="#">Admin</a>
               </div>
-              <a className="d-block" href="single-blog.html">
-                <h4>Ford clever bed stops your sleeping
-                  partner hogging the whole</h4>
-              </a>
+              <Link className="d-block" to="/blogPage">
+                <h4>{blog.title}</h4>
+              </Link>
               <div className="text-wrap">
                 <p>
-                  Let one fifth i bring fly to divided face for bearing the divide unto seed winged divided light
-                  Forth.
+                  {blog.content}
                 </p>
               </div>
               <a href="#" className="blog_btn">Learn More <span className="ml-2 ti-arrow-right"></span></a>
             </div>
           </div>
         </div>
-        
-        <div className="col-lg-4 col-md-6">
-          <div className="single-blog">
-            <div className="thumb">
-              <img className="img-fluid" src="img/b2.jpg" alt="" />
-            </div>
-            <div className="short_details">
-              <div className="meta-top d-flex">
-                <a href="#">By Admin</a>
-                <a href="#"><i className="ti-comments-smiley"></i>2 Comments</a>
-              </div>
-              <a className="d-block" href="single-blog.html">
-                <h4>Ford clever bed stops your sleeping
-                  partner hogging the whole</h4>
-              </a>
-              <div className="text-wrap">
-                <p>
-                  Let one fifth i bring fly to divided face for bearing the divide unto seed winged divided light
-                  Forth.
-                </p>
-              </div>
-              <a href="#" className="blog_btn">Learn More <span className="ml-2 ti-arrow-right"></span></a>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-lg-4 col-md-6">
-          <div className="single-blog">
-            <div className="thumb">
-              <img className="img-fluid" src="img/b3.jpg" alt="" />
-            </div>
-            <div className="short_details">
-              <div className="meta-top d-flex">
-                <a href="#">By Admin</a>
-                <a href="#"><i className="ti-comments-smiley"></i>2 Comments</a>
-              </div>
-              <a className="d-block" href="single-blog.html">
-                <h4>Ford clever bed stops your sleeping
-                  partner hogging the whole</h4>
-              </a>
-              <div className="text-wrap">
-                <p>
-                  Let one fifth i bring fly to divided face for bearing the divide unto seed winged divided light
-                  Forth.
-                </p>
-              </div>
-              <a href="#" className="blog_btn">Learn More <span className="ml-2 ti-arrow-right"></span></a>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </div>
+
   </section>
            
     </> );

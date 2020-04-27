@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import produitsApi from '../services/produitsApi';
 import Produits from './Produits';
+import { Link } from 'react-router-dom';
 
 
 const ProductInfo = (props) => {
@@ -70,25 +71,21 @@ const handleShop =(param) => {
     setCart({...cart, [name]: parseFloat(value)})
   }
   if(!produit){ return <div>loading</div>}else{  return ( <>
-     <section className="banner_area">
-      <div className="banner_inner d-flex align-items-center">
-        <div className="container">
-          <div
-            className="banner_content d-md-flex justify-content-between align-items-center"
-          >
-            <div className="mb-3 mb-md-0">
-              <h2>Détails du produit</h2>
-              <p>Les meilleurs types de dattes au Royaume du Maroc</p>
-            </div>
-            <div className="page_link">
-              <a href="index.html">Accuiel</a>
-              <a href="single-product.html">Produits</a>
-              <a href="single-product.html">Détails du produit</a> 
+      <div className=" container content-header bg-color">
+            <div className="container-fluid">
+              <div className="row mb-2">
+                <div className="col-sm-6">
+                  <h1 className="m-0 text-dark">Produits</h1>
+                </div>
+                <div className="col-sm-6">
+                  <ol className="breadcrumb float-sm-right">
+                    <li className="breadcrumb-item "><Link to="/"> accueil</Link></li>
+                    <li className="breadcrumb-item active">Produits</li>
+                  </ol>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
   
     <div className="product_image_area">
       <div className="container">

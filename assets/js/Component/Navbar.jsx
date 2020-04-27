@@ -14,15 +14,15 @@ import '../../css/app.css';
 import '../../css/style.css'
 import '../../css/responsive.css';
 
-const Navbar = ({cartNav,setCartNav}) => {
-
+const Navbar = ({cartNav}) => {
+console.log(cartNav)
  return ( 
     <>
   <header className="header_area">
     <div className="top_menu">
       <div className="container">
         <div className="row">
-          <div className="col-lg-7">
+          <div className="col-lg-7 ">
             <div className="float-left">
               <p><i className="fas fa-phone"></i> +212 618 911 741</p>
               <p><i className="fas fa-message"></i>email: dattesaljinan@gmail.com</p>
@@ -46,6 +46,27 @@ const Navbar = ({cartNav,setCartNav}) => {
                     compte
                   </Link>
                 </li>
+                <li className="nav-item dropdown show">
+                        <a className="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
+                          <i className="flag-icon flag-icon-us"></i>
+                        </a>
+                        <ul>
+                        <div className="dropdown-menu dropdown-menu-right p-0 show">
+                          <a href="#" className="dropdown-item active">
+                            <i className="flag-icon flag-icon-us mr-2"></i> English
+                          </a>
+                          <a href="#" className="dropdown-item">
+                            <i className="flag-icon flag-icon-de mr-2"></i> German
+                          </a>
+                          <a href="#" className="dropdown-item">
+                            <i className="flag-icon flag-icon-fr mr-2"></i> French
+                          </a>
+                          <a href="#" className="dropdown-item">
+                            <i className="flag-icon flag-icon-es mr-2"></i> Spanish
+                          </a>
+                        </div>
+                        </ul>
+                    </li>
               </ul>
             </div>
           </div>
@@ -54,7 +75,7 @@ const Navbar = ({cartNav,setCartNav}) => {
     </div>
     <div className="main_menu">
       <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light w-100">
+        <nav className="navbar navbar-expand-lg  w-100">
           <Link className="navbar-brand logo_h" to="/">
             {/* <img className="logo" src="img/logo.png" alt="" /> */} dattes Aljinan
           </Link>
@@ -64,7 +85,7 @@ const Navbar = ({cartNav,setCartNav}) => {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <div className="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse offset w-100 " id="navbarSupportedContent">
             <div className="row w-100 mr-0">
               <div className="col-lg-7 pr-0">
                 <ul className="nav navbar-nav center_nav pull-right">
@@ -115,13 +136,11 @@ const Navbar = ({cartNav,setCartNav}) => {
               <div className="col-lg-5 pr-0">
                 <ul className="nav navbar-nav navbar-right right_nav pull-right">
                   <li className="nav-item submenu dropdown">
-                    <a  className="nav-link dropdown-toggle icons text-danger" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <Link to="/cart" className="nav-link dropdown-toggle icons text-danger" data-toggle="dropdown" role="button" aria-haspopup="true"
                       aria-expanded="false"> 
-                      
-                      Panier 
-                      <span className=""> {cartNav.length > 0 && cartNav.length} </span> Produits 
-                      <i className="ti-shopping-cart fa-3x text-danger"></i></a>
-                   
+                      <i className="fas fa-cart-plus fa-2x mr-2"></i>  
+                      {/* <span className=""> {cartNav.length > 0 && cartNav.length} </span>  */}
+                    <span className="badge badge-warning  navbar-badge1">{ cartNav.length} </span> Panier</Link>
                     <ul className="dropdown-menu "> <Link to="/cart">
                       <table className="table table-hover">
                         <thead>
@@ -132,7 +151,7 @@ const Navbar = ({cartNav,setCartNav}) => {
                               <tr key={produit.id}>
                                   <td>{produit.title.slice(0,7)}</td>
                                   <td>
-                                    <img className="w-100 h-15 rounded" src={produit.avatar} />
+                                    <img className="w-100 h-20 rounded" src={"avatars/" +  produit.image} />
                                   </td>
                                   <td>{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} </td>
                               </tr> 
@@ -142,6 +161,7 @@ const Navbar = ({cartNav,setCartNav}) => {
                      </table>  </Link>
                     </ul>
                   </li>
+                
                 </ul>
               </div>
             </div>

@@ -86,7 +86,7 @@ class Produit
      * @ORM\ManyToMany(targetEntity="App\Entity\Avatar")
      * @ORM\JoinColumn()
      * ApiSubresource()
-     * @Groups({"produit_read"})
+     * @Groups({"produit_read","shops_read"})
      */
     public $avatars;
 
