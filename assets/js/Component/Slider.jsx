@@ -70,9 +70,9 @@ const Slider = () => {
           <div className="single-feature">
             <a href="#" className="title">
               <i className="flaticon-support"></i>
-              <h3 className="text-success">Produit de haute qualité</h3>
+              <h3 className="text-success">{translate("HAUTQUALITE")}</h3>
             </a>
-            <p>Afin de vous satisfaire, nous vous proposons le meilleur de ce qui est disponible sur le marché marocain</p>
+            <p>{translate("HAUTQUALITEP")}</p>
           </div>
         </div>
 

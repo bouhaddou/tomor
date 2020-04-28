@@ -130,12 +130,13 @@ const handleShop =(param) => {
                 <div className="col-lg-7 text-center">
                   <div className="offer_content">
                       <h3 className="text-uppercase mb-40">{bestProduct && bestProduct.title}</h3>
-                      <h3 className="text-uppercase">30% de promotion</h3>
-                      <a href="#" className="main_btn mb-20 mt-5">voir plus</a>
-                      <div className=" product-btm mt-3">
-                      Prix <span className="mr-4"><strong>{bestProduct && bestProduct.prix} </strong>Dhs</span>
-                      <del>{bestProduct && (bestProduct.prix * 1.20).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs</del>
-                    </div>
+                      <h3 className="text-uppercase">30% {translate("PROMOTION")}</h3>
+                      <a href="#" className="main_btn mb-20 mt-5"> {translate("LEARN")} </a>
+                      <div className=" product-btm mt-3 mr-2">
+                      {translate("PRIX")}  <span className="mr-4"><strong>{bestProduct && bestProduct.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} </strong>{translate("DHS")}</span>
+                      <span  className="ml-2 mr-1"> <del>{bestProduct && (bestProduct.prix * 1.20).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} {translate("DHS")} </del>
+                      </span> 
+                      </div>
                   </div>
                 </div>
             </div>
@@ -173,7 +174,7 @@ const handleShop =(param) => {
                   {blog.content}
                 </p>
               </div>
-              <a href="#" className="blog_btn">Learn More <span className="ml-2 ti-arrow-right"></span></a>
+              <a href="#" className="blog_btn">{translate("LEARN")} <span className="ml-2 ti-arrow-right"></span></a>
             </div>
           </div>
         </div>

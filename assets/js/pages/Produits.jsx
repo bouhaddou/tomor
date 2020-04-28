@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import produitsApi from '../services/produitsApi';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-const Produits = (props) => {
+import translate from '../i18n/translate';
+const Produits = ({setCartNav,lang}) => {
 
   const [produits,setProduits] = useState({
 
@@ -12,23 +12,17 @@ const Produits = (props) => {
   const [bestProduct,setBestProduct] = useState({});
   const [edi,setEdi] = useState(false);
 
-  
-  
-
   const fetchProduits = async () =>{
     try{
-     const data = await  produitsApi.findAll();
+        const data = await  produitsApi.findAll();
          setProduits(data);
          setFilterProduit(data.slice(0,6))
          const nombre = Math.floor(Math.random() * (data.length - 1 + 1)) + 1;
          setBestProduct(data[nombre])
-         
    }catch(error){
        console.log(error.response)
    }
 }
-
-
 
 useEffect(() => {
   fetchProduits();
@@ -45,7 +39,7 @@ const handleShop =(param) => {
           const image = param.avatars[0].filePath
           const {id,title, prix} = param
           localStorage.setItem("product",JSON.stringify([{id,title, image, prix,quantity}]))
-          props.setCartNav({id,title, image, prix,quantity})
+          setCartNav({id,title, image, prix,quantity})
         }else{
           const image = param.avatars[0].filePath
           const {id,title, prix} = param
@@ -62,29 +56,30 @@ const handleShop =(param) => {
           proLocal.push({id,title, image, prix,quantity})
           localStorage.setItem("product",JSON.stringify(proLocal))
           }
-          props.setCartNav(proLocal)
+          setCartNav(proLocal)
         }
         toast.success("le produit est ajouter au panier avec succée")
 }
-console.log(produits)
    if(!produits){
       return <div>loading</div>}else{ return ( <>
       <div className=" container content-header bg-color">
             <div className="container-fluid">
-              <div className="row mb-2">
+              <div className="row mb-2" dir={lang == "ar-MA" && "rtl" }>
                 <div className="col-sm-6">
-                  <h1 className="m-0 text-dark">Produits</h1>
+                  <div className={lang == "ar-MA" && " float-right"  }>
+                  <h1 className="m-0 text-dark"> {translate("PRODUCTS")} </h1>
+                  </div>
                 </div>
-                <div className="col-sm-6">
-                  <ol className="breadcrumb float-sm-right">
-                    <li className="breadcrumb-item "><Link to="/"> accueil</Link></li>
-                    <li className="breadcrumb-item active">Produits</li>
+                <div className="col-sm-6 ">
+                  <ol className={ lang == "ar-MA" ? "breadcrumb float-left" : "breadcrumb float-sm-right" }>
+                    <li className="breadcrumb-item "><Link to="/"> {translate("BORD")}</Link></li>
+                    <li className="breadcrumb-item active">{translate("PRODUCTS")}</li>
                   </ol>
                 </div>
               </div>
             </div>
           </div>
-        <section className="cat_product_area section_gap ">
+        <section className="cat_product_area section_gap " dir={lang == "ar-MA" && "rtl" }>
             <div className="container">
                 <div className="row flex-row-reverse">
                     <div className="col-lg-9">
@@ -93,8 +88,8 @@ console.log(produits)
                       <div className="row justify-content-center">
                         <div className="col-lg-12">
                           <div className="main_title">
-                            <h2><span className="text-success"> Produits</span></h2>
-                            <p>Les meilleurs types de dattes au Royaume du Maroc</p>
+                            <h2><span className="text-success"> {translate("PRODUCTS")}</span></h2>
+                            <p> {translate("PRODUCTP")}</p>
                           </div>
                         </div>
                       </div>
@@ -120,7 +115,7 @@ console.log(produits)
                                   <h4 className="text-info text-center">{produit.title.slice(0,22)}</h4>
                                   </Link>
                                   <div className="mt-3 text-center">
-                                    <h6 className="text-center text-danger text-center">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs</h6>
+                                    <h6 className="text-center text-danger text-center">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} {translate("DHS")}</h6>
                                   </div>
                                 </div>
                               </div>

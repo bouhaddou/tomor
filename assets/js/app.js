@@ -62,13 +62,13 @@ const App = () => {
         <I18nProvider locale={lang}>
          <div className="">
         <HashRouter>
-            {!isAuthenticated && <Navbar cartNav={cartNav} setLang={setLang}  />}
+            {!isAuthenticated && <Navbar cartNav={cartNav} setLang={setLang}  lang={lang} />}
             {isAuthenticated && <AdminNavbar />}
             {isAuthenticated && <AdminAside />}
             <Switch>
               
                 {!isAuthenticated && <Route path="/login"  render={props => (  <LoginPage  onLogin={setIsAuthenticated} {...props} /> )} />}
-                {!isAuthenticated && <Route  path="/produits" render={props=>{return <Produits setCartNav={setCartNav} {...props} /> }} />}
+                {!isAuthenticated && <Route  path="/produits" render={props=>{return <Produits setCartNav={setCartNav}  lang={lang} {...props} /> }} />}
                 {!isAuthenticated && <Route path="/ProductInfo/:id" render={props=> { return <ProductInfo setCartNav={setCartNav} {...props} /> }} />}
                 {!isAuthenticated &&<Route path="/cart" render={props=>{ return <Cart setCartNav={setCartNav} {...props} />  }} /> }
                 {!isAuthenticated && <Route path="/checkout" component={Checkout} />}

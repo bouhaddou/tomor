@@ -17,8 +17,26 @@ export default {
     "PaiementP" : "Votre confiance est importante pour nous",
     "LIVRAISON" : "LIVRAISON À DOMICILE",
     "LIVRAISONP" : "Ce service est disponible dans toutes les villes du Maroc, le délai maximum de réception est de 7 jours",
-    "HAUTQUALITE" : "PRODUIT DE HAUTE QUALITÉ"
-
-
+    "HAUTQUALITE" : "PRODUIT DE HAUTE QUALITÉ",
+    "HAUTQUALITEP": "Afin de vous satisfaire, nous vous proposons le meilleur de ce qui est disponible sur le marché marocain",
+    "LEARN" : "Voir Plus",
+    "PROMOTION" : "De Promotion ",
+    "DHS" : "DHS",
+    "PRIX": "PRIX",
+    "PRODUCTS" : "Produits",
+    "PRODUCT" : "Produit",
+    "QTE" : "Quantité",
+    "PRODUCTP" : "Les meilleurs types de dattes au Royaume du Maroc",
+    "BORD": "Table de bord",
+    "STOTAL":"SOUS-TOTAL",
+    "TOTAL" : "Montant Total ",
+    "SUPPRODUCT" : "Supprimer",
+    "TRANSPORT" : "frais de livraison",
+    "TRANSPORTMESS" : "Les frais de livraison n'ont pas encore été ajoutés",
+    "ACHAT": "POURSUIVRE VOS ACHATS",
+    "CAISSE" : "Passer à la caisse",
+    "SEARCH" : "Rechercher",
+    "IMAGEP" : "Photos Produits",
+    "ADMIN" : "Admin"
 }
 }

@@ -4,7 +4,7 @@ import blogApi from '../services/blogApi';
 import { Link } from 'react-router-dom';
 import PostApi from '../services/PostApi';
 import produitsApi from '../services/produitsApi';
-
+import translate from '../i18n/translate';
 
 
 const BlogPage = () => {
@@ -35,12 +35,12 @@ const BlogPage = () => {
             <div className="container-fluid">
               <div className="row mb-2">
                 <div className="col-sm-6">
-                  <h1 className="m-0 text-dark">Produits</h1>
+                  <h1 className="m-0 text-dark">{translate("PRODUCTS")}</h1>
                 </div>
                 <div className="col-sm-6">
                   <ol className="breadcrumb float-sm-right">
-                    <li className="breadcrumb-item "><Link to="/"> accueil</Link></li>
-                    <li className="breadcrumb-item active">Produits</li>
+                    <li className="breadcrumb-item "><Link to="/"> {translate("BORD")}</Link></li>
+                    <li className="breadcrumb-item active">{translate("PRODUCTS")}</li>
                   </ol>
                 </div>
               </div>
@@ -68,7 +68,7 @@ const BlogPage = () => {
                             </a>
                             <p>{blo.content}</p>
                             <ul className="blog-info-link">
-                              <li><a ><i className="ti-user"></i> Admin</a></li>
+                              <li><a ><i className="ti-user"></i> {translate("ADMIN")} </a></li>
                             </ul>
                         </div>
                       </article>
@@ -105,18 +105,18 @@ const BlogPage = () => {
                           <form >
                             <div className="form-group">
                               <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Search Keyword" />
+                                <input type="text" className="form-control"  />
                                 <div className="input-group-append">
                                   <button className="btn" type="button"><i className="ti-search"></i></button>
                                 </div>
                               </div>
                             </div>
-                            <button className="main_btn rounded-0 w-100" type="submit">Search</button>
+                            <button className="main_btn rounded-0 w-100" type="submit">{translate("SEARCH")} </button>
                           </form>
                       </aside>
 
                       <aside className="single_sidebar_widget popular_post_widget">
-                          <h3 className="widget_title">Recent Post</h3>
+                          <h3 className="widget_title">{translate("Nouveaux produits")}</h3>
                         {recentBlog.length > 0 && recentBlog.map(recent =>
                           <div className="media post_item" key={recent.id}>
                               <img style={{ maxHeight: 150, maxWidth:120  }} className="img-fuild" src={"avatars/" +  recent.avatars[0].filePath} alt={recent.title} />
@@ -131,7 +131,7 @@ const BlogPage = () => {
                          )}
                       </aside>
                       <aside className="single_sidebar_widget tag_cloud_widget">
-                          <h4 className="widget_title">Tag Clouds</h4>
+                          <h4 className="widget_title">{translate("Nouveaux produits")} </h4>
                           <ul className="list">
                           {filterProduit.length > 0 && filterProduit.map(produit => 
                               <li key={produit.id}>
@@ -144,7 +144,7 @@ const BlogPage = () => {
 
 
                       <aside className="single_sidebar_widget instagram_feeds">
-                        <h4 className="widget_title">Instagram Feeds</h4>
+                        <h4 className="widget_title">{translate("IMAGEP")} </h4>
                         <ul className="instagram_row flex-wrap">
                         {filterProduit.length > 0 && filterProduit.map(produit =>   
                             <li key={produit.id}>
@@ -157,7 +157,7 @@ const BlogPage = () => {
                       </aside>
 
 
-                      <aside className="single_sidebar_widget newsletter_widget">
+                      {/* <aside className="single_sidebar_widget newsletter_widget">
                         <h4 className="widget_title">Newsletter</h4>
 
                         <form action="#">
@@ -166,7 +166,7 @@ const BlogPage = () => {
                           </div>
                           <button className="main_btn rounded-0 w-100" type="submit">Subscribe</button>
                         </form>
-                      </aside>
+                      </aside> */}
                   </div>
               </div>
           </div>

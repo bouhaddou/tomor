@@ -14,9 +14,9 @@ import '../../css/app.css';
 import '../../css/style.css'
 import '../../css/responsive.css';
 import translate from '../i18n/translate';
-const Navbar = ({cartNav,setLang}) => {
+const Navbar = ({cartNav,setLang,lang}) => {
 
-
+console.log(lang)
  return ( 
     <>
   <header className="header_area">
@@ -47,19 +47,19 @@ const Navbar = ({cartNav,setLang}) => {
                   {translate("Compte")}
                   </Link>
                 </li>
-                <li>
-                  <button onClick={() => setLang("en-US")}>
-                    English
+                <li className="ml-1">
+                  <button  className="btn btn-link m-0 p-0 " onClick={() => setLang("en-US")}>
+                  <i className="flag-icon flag-icon-us"></i>
                   </button>
                 </li>
-                <li>
-                  <button onClick={() => setLang("fr-CA")}>
-                    Frensh
+                <li className="ml-1">
+                  <button className="btn btn-link m-0 p-0" onClick={() => setLang("fr-CA")}>
+                  <i class="flag-icon flag-icon-fr "></i>
                   </button>
                 </li>
-                <li>
-                  <button onClick={() => setLang("ar-MA")}>
-                    Arabic
+                <li className="ml-1">
+                  <button className="btn btn-link m-0 p-0" onClick={() => setLang("ar-MA")}>
+                  <i class="flag-icon flag-icon-ma "></i>
                   </button>
                 </li>
               </ul>
@@ -70,8 +70,8 @@ const Navbar = ({cartNav,setLang}) => {
     </div>
     <div className="main_menu">
       <div className="container">
-        <nav className="navbar navbar-expand-lg  w-100">
-          <Link className="navbar-brand logo_h" to="/">
+        <nav className="navbar navbar-expand-lg  w-100" dir={lang == "ar-MA" && "rtl"}>
+          <Link className={lang == "ar-MA" ? "navbar-brand  logo_h" : "navbar-brand  "} to="/">
             {/* <img className="logo" src="img/logo.png" alt="" /> */} dattes Aljinan
           </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -104,20 +104,19 @@ const Navbar = ({cartNav,setLang}) => {
                       aria-expanded="false">{translate("Blog")}</a>
                     <ul className="dropdown-menu">
                       <li className="nav-item">
-                      <Link className="nav-link" to="/blogPage">Blog </Link>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="">Blog Details</a>
+                          <Link className="nav-link" to="/blogPage">Blog </Link>
                       </li>
                     </ul>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item ">
                   <Link className="nav-link" to="/contact"> {translate("Contact")}  </Link>
+                  </li>
+                  <li className="nav-item">
                   </li>
                 </ul>
               </div>
               <div className="col-lg-5 pr-0">
-                <ul className="nav navbar-nav navbar-right right_nav pull-right">
+                <ul className={lang == "ar-MA" ?  "nav navbar-nav navbar-right right_nav pull-left" : "nav navbar-nav navbar-right right_nav pull-right" }>
                   <li className="nav-item submenu dropdown">
                     <Link to="/cart" className="nav-link dropdown-toggle icons text-danger" data-toggle="dropdown" role="button" aria-haspopup="true"
                       aria-expanded="false"> 
@@ -127,7 +126,6 @@ const Navbar = ({cartNav,setLang}) => {
                     <ul className="dropdown-menu "> <Link to="/cart">
                       <table className="table table-hover">
                         <thead>
-                          
                         </thead>
                         <tbody>
                             {cartNav.length > 0 && cartNav.map(produit =>  
@@ -141,10 +139,10 @@ const Navbar = ({cartNav,setLang}) => {
                             
                              )}
                         </tbody>
-                     </table>  </Link>
+                     </table>  
+                     </Link>
                     </ul>
                   </li>
-                  
                 </ul>
               </div>
             </div>

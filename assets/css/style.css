@@ -2478,3 +2478,14 @@
                             right: 55px;
                             top: 14px;
                         }
+                        .logo_h{
+                            margin-left: 130px;
+                        
+                        }
+                        .header_area .navbar .nav .nav-item .nav-link {
+                            font: 400 16px/80px "Arial",sans-serif;
+                            text-transform: uppercase;
+                            color: #2a2a2a;
+                            padding: 0px;
+                            display: inline-block;
+                        }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Field from '../Component/forms/Field';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-
+import translate from '../i18n/translate';
 const Cart = ({setCartNav}) => {
   const [cart, setCart] = useState({});
   const [total, setTotal] = useState(0);
@@ -85,12 +85,12 @@ if(!cart){return <div>loading</div>}else{ return ( <>
       <div className="container-fluid">
         <div className="row mb-2">
           <div className="col-sm-6">
-            <h1 className="m-0 text-dark">Produits</h1>
+            <h1 className="m-0 text-dark">{translate("Panier")} </h1>
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item "><Link to="/"> accueil</Link></li>
-              <li className="breadcrumb-item active">Produits</li>
+              <li className="breadcrumb-item "><Link to="/"> {translate("BORD")}</Link></li>
+              <li className="breadcrumb-item active">{translate("Panier")}</li>
             </ol>
           </div>
         </div>
@@ -100,23 +100,22 @@ if(!cart){return <div>loading</div>}else{ return ( <>
       <div className="container">
         <div className="cart_inner">
           <div className="table-responsive">
-            <h2>Panier ({cart.length} article)</h2>
+            <h2>{translate("Panier")} ({cart.length} {translate("PRODUCTS")})</h2>
             <table className="table">
               <thead>
                 <tr>
                   
-                  <th scope="col">ARTICLE</th>
+                  <th scope="col">{translate("PRODUCT")}</th>
                   <th className="text-center" scope="col"></th>
-                  <th scope="col">PRIX UNITAIRE</th>
-                  <th scope="col">QUANTITÉ</th>
-                  <th scope="col">SOUS-TOTAL</th>
-                  <th className="text-center" scope="col">Supprimer</th>
+                  <th scope="col"> {translate("PRIX")}</th>
+                  <th scope="col">{translate("QTE")}</th>
+                  <th scope="col">{translate("STOTAL")} </th>
+                  <th className="text-center" scope="col">{translate("SUPPRODUCT")} </th>
                 </tr>
               </thead>
               <tbody>
               {cart.length >0 && cart.map(produit =>
                 <tr key={produit.id}>
-                  
                   <td>
                       <div className=" imag-pro">
                         <img className=""
@@ -130,7 +129,7 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                           <p>{produit.title}</p> 
                       </div></td>
                   <td>
-                    <h5 className="prix">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs </h5> 
+                    <h5 className="prix">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} {translate("DHS")} </h5> 
                   </td>
                   <td>
                     <div className="prix">
@@ -138,10 +137,10 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                     </div>
                   </td>
                   <td>
-                    <h4 className="text-danger ">{(produit.prix * produit.quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') } Dhs</h4>
+                    <h4 className="text-danger ">{(produit.prix * produit.quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') } {translate("DHS")}</h4>
                   </td>
                   <td className="text-center">
-                  <a onClick={handleRemoveItem} id={produit.id}  className="text-danger"><i className="fas fa-trash-alt "></i> SUPPRIMER</a>
+                  <a onClick={handleRemoveItem} id={produit.id}  className="text-danger"><i className="fas fa-trash-alt "></i> {translate("SUPPRODUCT")}</a>
                   </td>
                 </tr>
               )}
@@ -160,11 +159,11 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                   <td></td>
                   <td>
                   <div className="checkout_btn_inner">
-                    <h5>Montant de Panier</h5>
+                    <h5>{translate("STOTAL")}</h5>
                     </div>
                   </td>
                   <td>
-                      <h4>{total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs </h4>
+                      <h4>{total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} {translate("DHS")} </h4>
                   </td>
                 </tr>
                 <tr>
@@ -172,10 +171,10 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                   <td></td>
                   <td></td>
                   <td>
-                    <h5>Transport</h5>
+                    <h5>{translate("TRANSPORT")} </h5>
                   </td>
                   <td>
-                    <h5>on va le calculer dans la suite partie</h5>
+                    <h5>{translate("TRANSPORTMESS")}</h5>
                   </td>
                 </tr>
                 <tr>
@@ -183,10 +182,10 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                   <td></td>
                   <td></td>
                   <td>
-                    <h5>Montant Total</h5>
+                    <h5>{translate("TOTAL")}</h5>
                   </td>
                   <td>
-                    <h3 className="text-danger ">{total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs</h3>
+                    <h3 className="text-danger ">{total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} {translate("DHS")} </h3>
                   </td>
                 </tr>
                 <tr>
@@ -204,12 +203,12 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                   <td></td>
                   <td>
                     <div className="checkout_btn_inner">
-                    <Link  className={" btn btn-info  " + (cart == "" && "  ")} to="/produits">POURSUIVRE VOS ACHATS</Link>
+                    <Link  className={" btn btn-info  " + (cart == "" && "  ")} to="/produits"> {translate("ACHAT")}  </Link>
                     </div>
                   </td>
                   <td>
                     <div className="checkout_btn_inner">
-                    <Link  className={"main_btn  " + (cart == "" && "  ")} to="/checkout">Passer à la caisse</Link>
+                    <Link  className={"main_btn  " + (cart == "" && "  ")} to="/checkout"> {translate("CAISSE")}</Link>
                     </div>
                   </td>
                 </tr>
