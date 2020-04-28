@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import PostApi from '../services/PostApi';
 import translate from '../i18n/translate';
-const HomePage = (props) => {
+const HomePage = ({setCartNav,lang}) => {
     const [produits,setProduits] = useState({});
     const [filterProduit,setFilterProduit] = useState({});
     const [bestProduct,setBestProduct] = useState(undefined);
@@ -27,7 +27,7 @@ const HomePage = (props) => {
         setBestProduct(data[nombre])
         const blogs = await PostApi.findAll()
         setBlogs(blogs.slice(0,3))
-        this.props.setCartNav({})
+        setCartNav({})
    }catch(error){
        console.log(error.response)
    }
@@ -49,7 +49,7 @@ const handleShop =(param) => {
           const quantity= 1
           const {id,title, avatar, prix} = param
           localStorage.setItem("product",JSON.stringify([{id,title, avatar, prix,quantity}]))
-          props.setCartNav({id,title, avatar, prix,quantity})
+setCartNav({id,title, avatar, prix,quantity})
         }else{
           const {id,title, avatar, prix} = param
           const proLocal = JSON.parse(localStorage.getItem("product"));
@@ -65,7 +65,7 @@ const handleShop =(param) => {
           proLocal.push({id,title, avatar, prix,quantity})
           localStorage.setItem("product",JSON.stringify(proLocal))
           } 
-          props.setCartNav(proLocal)
+setCartNav(proLocal)
 
     }
     toast.success("le produit est ajouter au panier avec succée")
@@ -87,7 +87,7 @@ const handleShop =(param) => {
         </div>
       </div>
 
-      <div className="row">
+      <div className="row" dir={lang == "ar-MA" && "rtl" }>
           {filterProduit.length >0 && filterProduit.map(produit =>
             <div key={produit.id} className="col-lg-3 col-md-6 col-sm-12">
               <div className="single-product">
@@ -107,7 +107,7 @@ const handleShop =(param) => {
                   <h4 className="text-info">{produit.title.slice(0,22)}</h4>
                   </Link>
                   <div className="mt-3 text-center">
-                    <h6 className="mr-4 text-center text-danger">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Dhs</h6>
+                    <h6 className="mr-4 text-center text-danger">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} {translate("DHS")}</h6>
                   </div>
                 </div>
               </div>
@@ -116,7 +116,7 @@ const handleShop =(param) => {
       </div>
     </div>
   </section>
-  <section className="offer_area">
+  <section className="offer_area" dir={lang == "ar-MA" && "rtl" }>
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-lg-5  ">
@@ -143,7 +143,7 @@ const handleShop =(param) => {
         </div>
   </section>
             
-  <section className="blog-area section-gap">
+  <section className="blog-area section-gap" >
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-lg-12">
@@ -154,7 +154,7 @@ const handleShop =(param) => {
         </div>
       </div>
      
-      <div className="row"> 
+      <div className="row" dir={lang == "ar-MA" && "rtl" }> 
       {blogs.length > 0 && blogs.map(blog => 
         <div key={blog.id} className="col-lg-4 col-md-6">
           <div className="single-blog">
@@ -164,17 +164,18 @@ const handleShop =(param) => {
             </div>
             <div className="short_details">
               <div className="meta-top d-flex">
-                <a href="#">Admin</a>
+                <a href="#">{translate("ADMIN")}</a>
               </div>
               <Link className="d-block" to="/blogPage">
-                <h4>{blog.title}</h4>
+                <h4 className={lang == "ar-MA" &&"text-right"}>{blog.title}</h4>
               </Link>
-              <div className="text-wrap">
-                <p>
+              <div className="text-wrap ">
+                <p >
                   {blog.content}
                 </p>
               </div>
-              <a href="#" className="blog_btn">{translate("LEARN")} <span className="ml-2 ti-arrow-right"></span></a>
+              <Link href="#" className={lang == "ar-MA" ? "blog_btn float-right": "blog_btn"}>{translate("LEARN")}
+               <span className={lang == "ar-MA" ? "ml-2 m-1 ti-arrow-left" : "ml-2 m-1 ti-arrow-right"}></span></Link>
             </div>
           </div>
         </div>

@@ -70,11 +70,11 @@ const App = () => {
                 {!isAuthenticated && <Route path="/login"  render={props => (  <LoginPage  onLogin={setIsAuthenticated} {...props} /> )} />}
                 {!isAuthenticated && <Route  path="/produits" render={props=>{return <Produits setCartNav={setCartNav}  lang={lang} {...props} /> }} />}
                 {!isAuthenticated && <Route path="/ProductInfo/:id" render={props=> { return <ProductInfo setCartNav={setCartNav} {...props} /> }} />}
-                {!isAuthenticated &&<Route path="/cart" render={props=>{ return <Cart setCartNav={setCartNav} {...props} />  }} /> }
+                {!isAuthenticated &&<Route path="/cart" render={props=>{ return <Cart setCartNav={setCartNav}  lang={lang} {...props} />  }} /> }
                 {!isAuthenticated && <Route path="/checkout" component={Checkout} />}
                 {!isAuthenticated && <Route path="/contact" component={Contact} />}
                 {!isAuthenticated && <Route path="/blogPage" component={BlogPage} /> }
-                {!isAuthenticated && <Route path="/" render={props=>{return <HomePage setLang={setLang} setCartNav={setCartNav} {...props} /> }} /> }
+                {!isAuthenticated && <Route path="/" render={props=>{return <HomePage setLang={setLang} setCartNav={setCartNav} lang={lang} {...props} /> }} /> }
                 <div className="content-wrapper">
                 <Switch>
                 <PrivatRoute path="/posts/show/:id" component={ShowPost} isAuthenticated={isAuthenticated}  />

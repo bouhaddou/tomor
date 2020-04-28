@@ -3,7 +3,7 @@ import Field from '../Component/forms/Field';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import translate from '../i18n/translate';
-const Cart = ({setCartNav}) => {
+const Cart = ({setCartNav,lang}) => {
   const [cart, setCart] = useState({});
   const [total, setTotal] = useState(0);
 
@@ -82,34 +82,36 @@ const handleRemoveItem = (event) =>{
 if(!cart){return <div>loading</div>}else{ return ( <>
     
     <div className=" container content-header bg-color">
-      <div className="container-fluid">
-        <div className="row mb-2">
-          <div className="col-sm-6">
-            <h1 className="m-0 text-dark">{translate("Panier")} </h1>
+            <div className="container-fluid">
+              <div className="row mb-2" dir={lang == "ar-MA" && "rtl" }>
+                <div className="col-sm-6">
+                  <div className={lang == "ar-MA" && " float-right"  }>
+                  <h1 className="m-0 text-dark"> {translate("Panier")} </h1>
+                  </div>
+                </div>
+                <div className="col-sm-6 ">
+                  <ol className={ lang == "ar-MA" ? "breadcrumb float-left" : "breadcrumb float-sm-right" }>
+                    <li className="breadcrumb-item "><Link to="/"> {translate("BORD")}</Link></li>
+                    <li className="breadcrumb-item active">{translate("Panier")}</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="col-sm-6">
-            <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item "><Link to="/"> {translate("BORD")}</Link></li>
-              <li className="breadcrumb-item active">{translate("Panier")}</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-    <section className="cart_area">
+    <section className="cart_area"  >
       <div className="container">
         <div className="cart_inner">
-          <div className="table-responsive">
-            <h2>{translate("Panier")} ({cart.length} {translate("PRODUCTS")})</h2>
-            <table className="table">
+          <div className="table-responsive" dir={lang == "ar-MA" && "rtl" }>
+            <h2> <span>
+              {translate("Panier")}</span> <span> ** {cart.length} {translate("PRODUCTS")}** </span></h2>
+            <table className="table" >
               <thead>
                 <tr>
-                  
                   <th scope="col">{translate("PRODUCT")}</th>
                   <th className="text-center" scope="col"></th>
-                  <th scope="col"> {translate("PRIX")}</th>
-                  <th scope="col">{translate("QTE")}</th>
-                  <th scope="col">{translate("STOTAL")} </th>
+                  <th scope="col"className="text-center "> {translate("PRIX")}</th>
+                  <th scope="col"className="text-center ">{translate("QTE")}</th>
+                  <th scope="col"className="text-center ">{translate("STOTAL")} </th>
                   <th className="text-center" scope="col">{translate("SUPPRODUCT")} </th>
                 </tr>
               </thead>
@@ -128,15 +130,15 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                   <td><div className=" ">
                           <p>{produit.title}</p> 
                       </div></td>
-                  <td>
-                    <h5 className="prix">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} {translate("DHS")} </h5> 
+                  <td className="text-center">
+                    <h5 className="prix ">{produit.prix.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} {translate("DHS")} </h5> 
                   </td>
-                  <td>
-                    <div className="prix">
+                  <td  className="text-center">
+                    <div className="prix ">
                     <input type="number" className="form-control" id={produit.id}  name={produit.id}  onChange={handleChange} value={produit.quantity} />
                     </div>
                   </td>
-                  <td>
+                  <td  className="text-center">
                     <h4 className="text-danger ">{(produit.prix * produit.quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') } {translate("DHS")}</h4>
                   </td>
                   <td className="text-center">
@@ -155,7 +157,8 @@ if(!cart){return <div>loading</div>}else{ return ( <>
               </tr>
                <tr>
                    
-               <td></td><td></td>
+               <td></td>
+               <td></td>
                   <td></td>
                   <td>
                   <div className="checkout_btn_inner">
@@ -196,8 +199,7 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                 <td></td> 
                 
               </tr>
-                <tr className="out_button_area">
-                  <td></td>
+                <tr className="">
                   <td></td>
                   <td></td>
                   <td></td>
@@ -214,8 +216,6 @@ if(!cart){return <div>loading</div>}else{ return ( <>
                 </tr>
               </tbody>
             </table>
-              
-           
           </div>
         </div>
       </div>
